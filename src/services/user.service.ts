@@ -1,5 +1,7 @@
 import db from "../data-source";
 import { User } from "../entities/user.entity";
+import { createHash } from "../utils/hash";
+
 
 const userRepository = db.getRepository(User);
 
@@ -13,14 +15,16 @@ export class UserService {
   }
 
   async login(credentials: { username: string; password: string }) {
+    const password = createHash(credentials.password);
     const user = await userRepository.findOneBy({
       username: credentials.username,
-      password: credentials.password,
+      password,
     });
     return user;
   }
 
   async register(user: User) {
-    return userRepository.save(user);
+    const password = createHash(user.password);
+    return userRepository.save({ ...user, password });
   }
 }
