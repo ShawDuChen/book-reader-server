@@ -8,5 +8,5 @@ CREATE TABLE `chapter` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `chapter_ibfk_1` (`book_id`),
-  CONSTRAINT `chapter_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`)
+  CONSTRAINT `chapter_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COMMENT='book chapter'

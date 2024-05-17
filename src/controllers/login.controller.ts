@@ -4,18 +4,14 @@ import jwt from "jsonwebtoken";
 import { UserService } from "../services/user.service";
 import { User } from "../entities/user.entity";
 import { createHash } from "../utils/hash";
-
-interface CredentialsParams {
-  username: string;
-  password: string;
-}
+import { CredentialsParams } from "../typing";
 
 @Controller("/auth")
 export class LoginController {
-  private userService: UserService;
+  private service: UserService;
 
   constructor() {
-    this.userService = new UserService();
+    this.service = new UserService();
   }
 
   @Post("/login")
@@ -35,13 +31,13 @@ export class LoginController {
   }
   async validateUser(credentials: CredentialsParams) {
     const password = createHash(credentials.password);
-    return this.userService.login({ ...credentials, password });
+    return this.service.login({ ...credentials, password });
   }
 
   @Post("/register")
   @ContentType("application/json")
   async register(@Body() user: User) {
     const password = createHash(user.password);
-    return this.userService.register({ ...user, password });
+    return this.service.register({ ...user, password });
   }
 }

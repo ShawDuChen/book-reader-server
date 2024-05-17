@@ -19,10 +19,10 @@ import { createHash } from "../utils/hash";
 
 @Controller("/user")
 export class UserController {
-  private userService: UserService;
+  service: UserService;
 
   constructor() {
-    this.userService = new UserService();
+    this.service = new UserService();
   }
 
   @Get("/") // queryList
@@ -31,13 +31,13 @@ export class UserController {
     @QueryParams()
     query: PageQuery<{ username?: string }>,
   ) {
-    return this.userService.queryList(query);
+    return this.service.queryList(query);
   }
 
   @Get("/:id")
   @UseBefore(authenticateToken)
   queryById(@Param("id") id: number) {
-    return this.userService.queryOne({ id });
+    return this.service.queryOne({ id });
   }
 
   @Post("/")
@@ -45,19 +45,19 @@ export class UserController {
   @ContentType("application/json")
   create(@Body() user: User, @CurrentUser() tokenUser: TokenUser) {
     const password = createHash(user.password);
-    return this.userService.create({ ...user, password, created_by: tokenUser.username });
+    return this.service.create({ ...user, password, created_by: tokenUser.username });
   }
 
   @Put("/:id")
   @UseBefore(authenticateToken)
   @ContentType("application/json")
   async update(@Param("id") id: number, @Body() user: User, @CurrentUser() tokenUser: TokenUser) {
-    return this.userService.update(id, { ...user, updated_by: tokenUser.username });
+    return this.service.update(id, { ...user, updated_by: tokenUser.username });
   }
 
   @Delete("/:id")
   @UseBefore(authenticateToken)
   delete(@Param("id") id: number) {
-    return this.userService.delete(id);
+    return this.service.delete(id);
   }
 }

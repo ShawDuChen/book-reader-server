@@ -10,10 +10,7 @@ export class UserService extends CrudService<User> {
   }
 
   async login(credentials: { username: string; password: string }) {
-    const user = await this.repository.findOneBy({
-      username: credentials.username,
-      password: credentials.password,
-    });
+    const user = await this.repository.findOneBy(credentials);
     return user;
   }
 

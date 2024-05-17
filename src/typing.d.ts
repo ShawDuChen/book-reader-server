@@ -10,3 +10,8 @@ export interface TokenUser {
   iat: number;
   exp: number;
 }
+
+export interface CredentialsParams {
+  username: string;
+  password: string;
+}
