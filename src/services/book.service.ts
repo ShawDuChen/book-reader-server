@@ -1,6 +1,6 @@
 import CrudService from "./base/crud.service";
 import db from "../data-source";
-import { Book } from "../entities/book.entity";
+import { Book } from "../export";
 
 const repository = db.getRepository(Book);
 

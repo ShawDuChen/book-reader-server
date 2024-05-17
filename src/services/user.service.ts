@@ -1,10 +1,10 @@
-import db from "../data-source";
-import { User } from "../entities/user.entity";
 import CrudService from "./base/crud.service";
+import db from "../data-source";
+import { User } from "../export";
 
 const userRepository = db.getRepository(User);
 
-export class UserService extends CrudService<User> {
+export default class UserService extends CrudService<User> {
   constructor() {
     super(userRepository);
   }

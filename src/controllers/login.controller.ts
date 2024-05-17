@@ -1,8 +1,7 @@
 import { Body, ContentType, Controller, Post, UnauthorizedError } from "routing-controllers";
 import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
-import { UserService } from "../services/user.service";
-import { User } from "../entities/user.entity";
+import { UserService, User } from "../export";
 import { createHash } from "../utils/hash";
 import { CredentialsParams } from "../typing";
 

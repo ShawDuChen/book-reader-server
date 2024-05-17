@@ -1,11 +1,8 @@
 import { json, urlencoded } from "body-parser";
 import { Action, createExpressServer } from "routing-controllers";
-import ds from "./src/data-source";
-import { UserController } from "./src/controllers/user.controller";
-import { LoginController } from "./src/controllers/login.controller";
+import { UserController, LoginController, BookController, ChapterController } from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
-import { BookController } from "./src/controllers/book.controller";
-import { ChapterController } from "./src/controllers/chapter.controller";
+import ds from "./src/data-source";
 
 ds.initialize()
   .then(() => {

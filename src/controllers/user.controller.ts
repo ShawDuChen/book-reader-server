@@ -11,10 +11,9 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import { UserService } from "../services/user.service";
+import { UserService, User } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-import { User } from "../entities/user.entity";
 import { createHash } from "../utils/hash";
 
 @Controller("/user")

@@ -11,10 +11,9 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import BookService from "../services/book.service";
+import { BookService, Book } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-import { Book } from "../entities/book.entity";
 
 @Controller("/book")
 export class BookController {

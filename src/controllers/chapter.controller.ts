@@ -11,10 +11,9 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import ChapterService from "../services/chapter.service";
+import { ChapterService, Chapter } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-import { Chapter } from "../entities/chapter.entity";
 
 @Controller("/chapter")
 export class ChapterController {
