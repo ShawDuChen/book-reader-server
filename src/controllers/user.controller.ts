@@ -27,17 +27,20 @@ export class UserController {
 
   @Get("/") // queryList
   @UseBefore(authenticateToken)
-  queryList(
+  async queryList(
     @QueryParams()
     query: PageQuery<{ username?: string }>,
   ) {
-    return this.service.queryList(query);
+    const { total, lists } = await this.service.queryList(query);
+    return { total, lists: lists.map(({ password, ...item }) => item) };
   }
 
   @Get("/:id")
   @UseBefore(authenticateToken)
-  queryById(@Param("id") id: number) {
-    return this.service.queryOne({ id });
+  async queryById(@Param("id") id: number) {
+    const user = await this.service.queryOne({ id });
+    const { password, ...ret } = user!;
+    return ret;
   }
 
   @Post("/")

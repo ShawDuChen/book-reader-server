@@ -5,6 +5,7 @@ import { UserController } from "./src/controllers/user.controller";
 import { LoginController } from "./src/controllers/login.controller";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import { BookController } from "./src/controllers/book.controller";
+import { ChapterController } from "./src/controllers/chapter.controller";
 
 ds.initialize()
   .then(() => {
@@ -15,7 +16,7 @@ ds.initialize()
   });
 
 const app = createExpressServer({
-  controllers: [UserController, LoginController, BookController],
+  controllers: [UserController, LoginController, BookController, ChapterController],
   classTransformer: true,
   currentUserChecker: async (action: Action) => {
     const token = getToken(action.request.headers.authorization);
