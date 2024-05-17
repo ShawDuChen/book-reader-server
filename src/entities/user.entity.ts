@@ -5,7 +5,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @PrimaryColumn({ name: "username" })
+  @Column({ name: "username" })
   username!: string;
 
   @Column()
@@ -22,6 +22,9 @@ export class User {
 
   @Column()
   address!: string;
+
+  @Column()
+  status!: string;
 
   @Column({ name: "created_by" })
   created_by!: string;

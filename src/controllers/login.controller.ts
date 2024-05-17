@@ -3,6 +3,7 @@ import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
 import { UserService } from "../services/user.service";
 import { User } from "../entities/user.entity";
+import { createHash } from "../utils/hash";
 
 interface CredentialsParams {
   username: string;
@@ -33,12 +34,14 @@ export class LoginController {
     }
   }
   async validateUser(credentials: CredentialsParams) {
-    return this.userService.login(credentials);
+    const password = createHash(credentials.password);
+    return this.userService.login({ ...credentials, password });
   }
 
   @Post("/register")
   @ContentType("application/json")
   async register(@Body() user: User) {
-    return this.userService.register(user);
+    const password = createHash(user.password);
+    return this.userService.register({ ...user, password });
   }
 }

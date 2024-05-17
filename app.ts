@@ -1,9 +1,9 @@
 import { json, urlencoded } from "body-parser";
-import { createExpressServer } from "routing-controllers";
+import { Action, createExpressServer } from "routing-controllers";
 import ds from "./src/data-source";
 import { UserController } from "./src/controllers/user.controller";
 import { LoginController } from "./src/controllers/login.controller";
-import { authenticateToken } from "./src/middlewares/jwt";
+import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 
 ds.initialize()
   .then(() => {
@@ -16,6 +16,11 @@ ds.initialize()
 const app = createExpressServer({
   controllers: [UserController, LoginController],
   classTransformer: true,
+  currentUserChecker: async (action: Action) => {
+    const token = getToken(action.request.headers.authorization);
+    const user = await verify(token);
+    return user;
+  },
 });
 
 app.use(authenticateToken);
