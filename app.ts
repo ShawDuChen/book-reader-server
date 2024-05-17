@@ -3,6 +3,7 @@ import { Action, createExpressServer } from "routing-controllers";
 import { UserController, LoginController, BookController, ChapterController } from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import ds from "./src/data-source";
+import { logMiddleware } from "./src/middlewares/log";
 
 ds.initialize()
   .then(() => {
@@ -21,6 +22,8 @@ const app = createExpressServer({
     return user;
   },
 });
+
+app.use(logMiddleware);
 
 app.use(authenticateToken);
 

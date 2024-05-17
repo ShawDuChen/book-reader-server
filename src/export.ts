@@ -2,6 +2,7 @@
 export { Book } from "./entities/book.entity";
 export { Chapter } from "./entities/chapter.entity";
 export { User } from "./entities/user.entity";
+export { Logger } from "./entities/log.entity";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";

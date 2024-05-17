@@ -3,3 +3,4 @@ pnpm-lock.yaml
 .vscode
 .env.development
 .https
+logs
