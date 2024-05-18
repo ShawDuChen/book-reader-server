@@ -42,7 +42,11 @@ export class BookController {
 
   @Put("/:id")
   @ContentType("application/json")
-  async update(@Param("id") id: number, @Body() body: Book, @CurrentUser() user: TokenUser) {
+  async update(
+    @Param("id") id: number,
+    @Body() body: Book,
+    @CurrentUser() user: TokenUser,
+  ) {
     return this.service.update(id, { ...body, updated_by: user.username });
   }
 

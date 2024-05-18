@@ -1,9 +1,16 @@
 import { json, urlencoded } from "body-parser";
 import { Action, createExpressServer } from "routing-controllers";
-import { UserController, LoginController, BookController, ChapterController } from "./src/export";
+import {
+  UserController,
+  LoginController,
+  BookController,
+  ChapterController,
+  RoleController,
+} from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import ds from "./src/data-source";
 import { logMiddleware } from "./src/middlewares/log";
+import { CategoryController } from "./src/controllers/category.controller";
 
 ds.initialize()
   .then(() => {
@@ -14,7 +21,14 @@ ds.initialize()
   });
 
 const app = createExpressServer({
-  controllers: [UserController, LoginController, BookController, ChapterController],
+  controllers: [
+    UserController,
+    LoginController,
+    BookController,
+    ChapterController,
+    RoleController,
+    CategoryController,
+  ],
   classTransformer: true,
   currentUserChecker: async (action: Action) => {
     const token = getToken(action.request.headers.authorization);

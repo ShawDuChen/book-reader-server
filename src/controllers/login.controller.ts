@@ -1,4 +1,11 @@
-import { Body, ContentType, Controller, Post, UnauthorizedError, UseBefore } from "routing-controllers";
+import {
+  Body,
+  ContentType,
+  Controller,
+  Post,
+  UnauthorizedError,
+  UseBefore,
+} from "routing-controllers";
 import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
 import { UserService, User, userValidator } from "../export";
@@ -20,7 +27,11 @@ export class LoginController {
     const valid = await this.validateUser(credentials);
     if (valid) {
       const token = jwt.sign(
-        { username: credentials.username, roles: ["ADMIN"], expiresIn: Date.now() + ONE_DAY_TIMESTAMP },
+        {
+          username: credentials.username,
+          roles: ["ADMIN"],
+          expiresIn: Date.now() + ONE_DAY_TIMESTAMP,
+        },
         JWT_SECRET,
         { expiresIn: "24h" },
       );

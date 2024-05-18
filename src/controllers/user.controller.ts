@@ -11,7 +11,7 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import { UserService, User } from "../export";
+import { UserService, User, userValidator } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 import { createHash } from "../utils/hash";
@@ -43,15 +43,31 @@ export class UserController {
 
   @Post("/")
   @ContentType("application/json")
-  create(@Body() user: User, @CurrentUser() tokenUser: TokenUser) {
+  @UseBefore(...userValidator)
+  async create(@Body() user: User, @CurrentUser() tokenUser: TokenUser) {
     const password = createHash(user.password);
-    return this.service.create({ ...user, password, created_by: tokenUser.username });
+    const newUser = await this.service.create({
+      ...user,
+      password,
+      created_by: tokenUser.username,
+    });
+    return { ...newUser, password: undefined };
   }
 
   @Put("/:id")
   @ContentType("application/json")
-  async update(@Param("id") id: number, @Body() user: User, @CurrentUser() tokenUser: TokenUser) {
-    return this.service.update(id, { ...user, updated_by: tokenUser.username });
+  // @UseBefore(...userValidator)
+  async update(
+    @Param("id") id: number,
+    @Body() user: User,
+    @CurrentUser() tokenUser: TokenUser,
+  ) {
+    const password = user.password ? createHash(user.password) : undefined;
+    return this.service.update(id, {
+      ...user,
+      password: password!,
+      updated_by: tokenUser.username,
+    });
   }
 
   @Delete("/:id")

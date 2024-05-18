@@ -8,6 +8,9 @@ export class Book {
   @Column()
   name!: string;
 
+  @Column()
+  category_id!: number;
+
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;
 

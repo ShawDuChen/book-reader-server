@@ -26,6 +26,9 @@ export class User {
   @Column()
   status!: string;
 
+  @Column()
+  role_id?: number;
+
   @Column({ name: "created_by" })
   created_by!: string;
 
