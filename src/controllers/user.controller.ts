@@ -38,7 +38,7 @@ export class UserController {
   @UseBefore(authenticateToken)
   async queryById(@Param("id") id: number) {
     const user = await this.service.queryOne({ id });
-    const { password, ...ret } = user!;
+    const { password, ...ret } = user;
     return ret;
   }
 

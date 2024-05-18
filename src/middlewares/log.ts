@@ -3,8 +3,13 @@ import db from "../data-source";
 import { Logger } from "../export";
 import dayjs from "dayjs";
 import logger from "../logger";
+import { TokenUser } from "../typing";
 
-export const logMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+interface LoggerRequest extends Request {
+  user?: TokenUser;
+}
+    
+export const logMiddleware = async (req: LoggerRequest, res: Response, next: NextFunction) => {
   const start = new Date();
   const logRepository = db.getRepository(Logger);
 
@@ -17,8 +22,9 @@ export const logMiddleware = async (req: Request, res: Response, next: NextFunct
     logData.url = req.originalUrl;
     logData.status = res.statusCode;
     logData.request_body = JSON.stringify(req.body);
-    // logData.response_body = JSON.stringify(resBody);
+    logData.response_body = res.statusMessage;
     logData.created_at = dayjs(start).format("YYYY-MM-DD HH:mm:ss");
+    logData.created_by = req.user?.username || 'unknown';
     try {
       await logRepository.save(logData);
       logger.info(`Logged request: ${req.originalUrl} - Status: ${res.statusCode} - Duration ${duration}`);
