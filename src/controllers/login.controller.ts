@@ -1,7 +1,7 @@
-import { Body, ContentType, Controller, Post, UnauthorizedError } from "routing-controllers";
+import { Body, ContentType, Controller, Post, UnauthorizedError, UseBefore } from "routing-controllers";
 import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
-import { UserService, User } from "../export";
+import { UserService, User, userValidator } from "../export";
 import { createHash } from "../utils/hash";
 import { CredentialsParams } from "../typing";
 
@@ -15,6 +15,7 @@ export class LoginController {
 
   @Post("/login")
   @ContentType("application/json")
+  @UseBefore(...userValidator)
   async login(@Body() credentials: CredentialsParams) {
     const valid = await this.validateUser(credentials);
     if (valid) {
@@ -35,6 +36,7 @@ export class LoginController {
 
   @Post("/register")
   @ContentType("application/json")
+  @UseBefore(...userValidator) //json(),
   async register(@Body() user: User) {
     const password = createHash(user.password);
     return this.service.register({ ...user, password });

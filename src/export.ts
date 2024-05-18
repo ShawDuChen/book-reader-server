@@ -1,3 +1,6 @@
+// Validator
+export { userValidator } from './validators/user.validator'
+
 // Entities
 export { Book } from "./entities/book.entity";
 export { Chapter } from "./entities/chapter.entity";
