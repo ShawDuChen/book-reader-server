@@ -16,6 +16,7 @@ import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 
 @Controller("/chapter")
+@UseBefore(authenticateToken)
 export class ChapterController {
   service: ChapterService;
 
@@ -24,34 +25,29 @@ export class ChapterController {
   }
 
   @Get("/")
-  @UseBefore(authenticateToken)
   async queryList(@QueryParams() query: PageQuery<Partial<Chapter>>) {
     const { total, lists } = await this.service.queryList(query);
     return { total, lists: lists.map(({ content, ...rest }) => rest) };
   }
 
   @Get("/:id")
-  @UseBefore(authenticateToken)
   async queryById(@Param("id") id: number) {
     return this.service.queryOne({ id });
   }
 
   @Post("/")
-  @UseBefore(authenticateToken)
   @ContentType("application/json")
-  async create(@Body() body: Chapter, @CurrentUser() user: TokenUser) {
+  async create(@Body({ }) body: Chapter, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
   }
 
   @Put("/:id")
-  @UseBefore(authenticateToken)
   @ContentType("application/json")
   async update(@Param("id") id: number, @Body() body: Chapter, @CurrentUser() user: TokenUser) {
     return this.service.update(id, { ...body, updated_by: user.username });
   }
 
   @Delete("/:id")
-  @UseBefore(authenticateToken)
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
   }
