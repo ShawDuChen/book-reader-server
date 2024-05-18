@@ -31,13 +31,18 @@ export class UserController {
     query: PageQuery<{ username?: string }>,
   ) {
     const { total, lists } = await this.service.queryList(query);
-    return { total, lists: lists.map(({ password, ...item }) => item) };
+    return { total, lists: lists.map(({ password: _, ...item }) => item) };
   }
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    const user = await this.service.queryOne({ id });
-    const { password, ...ret } = user;
+    const user = await this.service.queryOne(
+      { id },
+      {
+        relations: ["role"],
+      },
+    );
+    const { password: _password, ...ret } = user;
     return ret;
   }
 

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Book } from "./book.entity";
 
 @Entity("chapter")
 export class Chapter {
@@ -13,6 +20,14 @@ export class Chapter {
 
   @Column()
   book_id!: number;
+
+  @OneToOne(() => Book)
+  @JoinColumn({
+    name: "book_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "book_id",
+  })
+  book?: Book;
 
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;

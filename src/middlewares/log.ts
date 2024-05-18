@@ -34,8 +34,10 @@ export const logMiddleware = async (
       logger.info(
         `Logged request: ${req.originalUrl} - Status: ${res.statusCode} - Duration ${duration}`,
       );
-    } catch (error: any) {
-      logger.error(`Error saving request log to DB: ${error.message}`);
+    } catch (error) {
+      logger.error(
+        `Error saving request log to DB: ${(error as unknown as Error).message}`,
+      );
     }
   });
   next();

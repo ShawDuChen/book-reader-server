@@ -27,12 +27,17 @@ export class ChapterController {
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<Chapter>>) {
     const { total, lists } = await this.service.queryList(query);
-    return { total, lists: lists.map(({ content, ...rest }) => rest) };
+    return { total, lists: lists.map(({ content: _, ...rest }) => rest) };
   }
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    return this.service.queryOne({ id });
+    return this.service.queryOne(
+      { id },
+      {
+        relations: ["book"],
+      },
+    );
   }
 
   @Post("/")

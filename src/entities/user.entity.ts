@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Role } from "./role.entity";
 
 @Entity("user")
 export class User {
@@ -28,6 +35,14 @@ export class User {
 
   @Column()
   role_id?: number;
+
+  @OneToOne(() => Role)
+  @JoinColumn({
+    name: "role_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "role_id",
+  })
+  role?: Role;
 
   @Column({ name: "created_by" })
   created_by!: string;

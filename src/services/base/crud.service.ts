@@ -20,20 +20,23 @@ export default class CrudService<T extends CrudServiceProps> {
   }
 
   async queryList<T = null>(query: PageQuery<T>) {
-    let { page, limit, ...rest } = query;
-    page = page || 1;
+    const { page, limit, ...rest } = query;
     const take = limit || 10;
-    const skip = (page - 1) * take;
+    const skip = ((page || 1) - 1) * take;
     const [lists, total] = await this.repository.findAndCount({
-      where: rest as any,
+      where: rest as unknown as FindOneOptions<unknown>["where"],
       skip,
       take,
+      select: [""],
     });
     return { total, lists };
   }
 
-  async queryOne(where: FindOneOptions<T>["where"]) {
-    const data = await this.repository.findOne({ where });
+  async queryOne(
+    where: FindOneOptions<T>["where"],
+    options?: FindOneOptions<T>,
+  ) {
+    const data = await this.repository.findOne({ where, ...options });
     return data || ({ message: "unexist" } as unknown as T);
   }
 

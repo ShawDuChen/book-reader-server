@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Category } from "./category.entity";
+import { Chapter } from "./chapter.entity";
 
 @Entity("book")
 export class Book {
@@ -10,6 +19,17 @@ export class Book {
 
   @Column()
   category_id!: number;
+
+  @OneToOne(() => Category)
+  @JoinColumn({
+    name: "category_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "category_id",
+  })
+  category?: Category;
+
+  @OneToMany(() => Chapter, (chapter) => chapter.book)
+  chapters?: Chapter[];
 
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;

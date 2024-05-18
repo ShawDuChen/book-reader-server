@@ -31,7 +31,12 @@ export class BookController {
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    return this.service.queryOne({ id });
+    return this.service.queryOne(
+      { id },
+      {
+        relations: ["category", "chapters"],
+      },
+    );
   }
 
   @Post("/")
