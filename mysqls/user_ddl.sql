@@ -19,4 +19,4 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_no_uindex` (`username`),
   KEY `user_role` (`role_id`),
   CONSTRAINT `user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='用户表'
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='用户表'

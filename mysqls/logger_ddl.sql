@@ -1,4 +1,4 @@
--- Active: 1715415277331@@127.0.0.1@3306@book_reader
+-- Active: 1716033677212@@127.0.0.1@3306@book_reader
 CREATE TABLE `logger` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `method` varchar(32) DEFAULT NULL,
@@ -11,4 +11,4 @@ CREATE TABLE `logger` (
   `updated_at` datetime DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL COMMENT 'Updated User',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COMMENT='logger'
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COMMENT='logger'

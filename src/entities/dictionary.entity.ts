@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { DictionaryData } from "./dict-data.entity";
 
 @Entity("dictionary")
 export class Dictionary {
@@ -16,6 +17,9 @@ export class Dictionary {
 
   @Column()
   remark?: string;
+
+  @OneToMany(() => DictionaryData, (dict_data) => dict_data.dictionary)
+  dict_data_list?: DictionaryData[];
 
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;

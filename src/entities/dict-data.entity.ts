@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Dictionary } from "./dictionary.entity";
 
 @Entity("dict_data")
 export class DictionaryData {
@@ -13,6 +20,14 @@ export class DictionaryData {
 
   @Column()
   dict_type!: number;
+
+  @OneToOne(() => Dictionary)
+  @JoinColumn({
+    name: "dict_type",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "dict_type",
+  })
+  dictionary?: Dictionary;
 
   @Column()
   status?: number;

@@ -54,4 +54,9 @@ export class DictionaryDataController {
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
   }
+
+  @Get("/dict_type/:dict_type")
+  async getByType(@Param("dict_type") dict_type: number) {
+    return this.service.getByType(dict_type);
+  }
 }

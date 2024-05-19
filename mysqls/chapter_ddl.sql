@@ -1,4 +1,4 @@
--- Active: 1715415277331@@127.0.0.1@3306@book_reader
+-- Active: 1716033677212@@127.0.0.1@3306@book_reader
 CREATE TABLE `chapter` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `title` varchar(255) DEFAULT NULL,
@@ -11,4 +11,4 @@ CREATE TABLE `chapter` (
   PRIMARY KEY (`id`),
   KEY `chapter_ibfk_1` (`book_id`),
   CONSTRAINT `chapter_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COMMENT='book chapter'
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COMMENT='book chapter'
