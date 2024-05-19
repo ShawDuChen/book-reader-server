@@ -4,7 +4,7 @@ import { Logger } from "../export";
 
 const repository = db.getRepository(Logger);
 
-export default class BookService extends CrudService<Logger> {
+export default class LoggerService extends CrudService<Logger> {
   constructor() {
     super(repository);
   }

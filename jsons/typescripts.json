@@ -37,7 +37,7 @@
       "",
       "const ${2:repository} = db.getRepository(${1:Book});",
       "",
-      "export default class BookService extends CrudService<${1:Book}> {",
+      "export default class ${1:Book}Service extends CrudService<${1:Book}> {",
       "  constructor() {",
       "    super(${2:repository});",
       "  }",

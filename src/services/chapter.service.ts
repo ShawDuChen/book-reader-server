@@ -4,7 +4,7 @@ import { Chapter } from "../export";
 
 const repository = db.getRepository(Chapter);
 
-export default class BookService extends CrudService<Chapter> {
+export default class ChapterService extends CrudService<Chapter> {
   constructor() {
     super(repository);
   }
