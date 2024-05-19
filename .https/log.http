@@ -1,0 +1,34 @@
+### Log List
+GET {{host}}/log?page=1&limit=10
+Authorization: {{token}}
+
+### Log Item
+GET {{host}}/log/190
+Authorization: {{token}}
+
+### Log Create
+POST {{host}}/log
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "method": "GET",
+  "url": "{{host}}/log",
+  "status": 200
+}
+
+### Log Update
+PUT {{host}}/log/190
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "method": "GET",
+  "url": "{{host}}/log",
+  "status": 404
+}
+
+### Log Delete
+DELETE {{host}}/log/190
+Authorization: {{token}}
+

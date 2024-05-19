@@ -34,6 +34,11 @@ export class AuthorController {
     return this.service.queryOne({ id });
   }
 
+  @Get("/:author_id/books")
+  async queryBooks(@Param("author_id") author_id: number) {
+    return this.service.queryBooks(author_id);
+  }
+
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Author, @CurrentUser() user: TokenUser) {

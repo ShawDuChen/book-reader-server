@@ -5,7 +5,8 @@ export type PageQuery<T = unknown> = {
 
 export interface TokenUser {
   username: string;
-  roles: string[];
+  role: string;
+  is_super: string;
   expiresIn: number;
   iat: number;
   exp: number;

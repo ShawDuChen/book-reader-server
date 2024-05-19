@@ -1,0 +1,54 @@
+
+### Register
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "adminuser201@email.com",
+  "password": "12345678"
+}
+
+
+### Login
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "adminuser201@email.com",
+  "password": "12345678"
+}
+
+
+### User List
+GET {{host}}/user?page=1&limit=1
+Authorization: {{token}}
+
+### Get User
+GET  {{host}}/user/57
+Authorization: {{token}}
+
+### User Create
+POST  {{host}}/user
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "username": "adminuser232@email.com",
+  "password": "12345678"
+}
+
+### User Update
+PUT  {{host}}/user/57
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "sex": "M",
+  "tel": "13666666666",
+  "role_id": 7
+}
+
+### User Delete
+DELETE  {{host}}/user/55
+Authorization: {{token}}
+s

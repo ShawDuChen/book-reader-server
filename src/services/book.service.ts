@@ -8,4 +8,16 @@ export default class BookService extends CrudService<Book> {
   constructor() {
     super(repository);
   }
+
+  async queryChapters(id: number) {
+    const result = await this.queryOne(
+      {
+        id,
+      },
+      {
+        relations: ["chapters"],
+      },
+    );
+    return result.id ? result.chapters || [] : result;
+  }
 }

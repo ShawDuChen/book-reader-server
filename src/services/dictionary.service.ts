@@ -8,4 +8,14 @@ export default class DictionaryService extends CrudService<Dictionary> {
   constructor() {
     super(repository);
   }
+
+  async queryDictDataList(id: number) {
+    const result = await this.queryOne(
+      { id },
+      {
+        relations: ["dict_data_list"],
+      },
+    );
+    return result.id ? result.dict_data_list || [] : result;
+  }
 }

@@ -29,7 +29,8 @@ export class LoginController {
       const token = jwt.sign(
         {
           username: credentials.username,
-          roles: ["ADMIN"],
+          role: valid.role?.name,
+          is_super: valid.is_super,
           expiresIn: Date.now() + ONE_DAY_TIMESTAMP,
         },
         JWT_SECRET,

@@ -34,9 +34,14 @@ export class BookController {
     return this.service.queryOne(
       { id },
       {
-        relations: ["category", "chapters"],
+        relations: ["category", "author"],
       },
     );
+  }
+
+  @Get("/:id/chapters")
+  async queryChapters(@Param("id") id: number) {
+    return this.service.queryChapters(id);
   }
 
   @Post("/")

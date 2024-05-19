@@ -1,0 +1,33 @@
+
+### Role List
+GET {{host}}/role?page=1&limit=1
+Authorization: {{token}}
+
+
+### Role Info
+GET {{host}}/role/1
+Authorization: {{token}}
+
+### Role Create
+POST {{host}}/role
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "authorities": "1,2"
+}
+
+### Role Update
+PUT  {{host}}/role/6
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "admin",
+  "authorities": "[1,2,3]"
+}
+
+### DELETE
+DELETE  {{host}}/role/6
+Authorization: {{token}}

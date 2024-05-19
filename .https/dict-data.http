@@ -1,0 +1,35 @@
+### GET List
+GET {{host}}/dict_data?page=1&limit=10
+Authorization: {{token}}
+
+### GET Item By ID
+GET {{host}}/dict_data/1
+Authorization: {{token}}
+
+### Post Create Item
+POST {{host}}/dict_data
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "value": "8",
+  "label": "Item 8",
+  "dict_type": 4
+}
+### PUT Update Item
+PUT {{host}}/dict_data/2
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "value": "1-update",
+  "label": "Item Update 1",
+  "dict_type": 2
+}
+### DELETE Item
+DELETE {{host}}/dict_data/2
+Authorization: {{token}}
+
+### GET BY DICT TYPE
+GET {{host}}/dict_data/dict_type/2
+Authorization: {{token}}

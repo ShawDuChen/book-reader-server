@@ -1,0 +1,30 @@
+### GET Chapter List
+GET  {{host}}/chapter?page=1&limit=10
+Authorization: {{token}}
+
+### GET Chapter
+GET  {{host}}/chapter/98
+Authorization: {{token}}
+
+### POST Chapter Create
+POST {{host}}/chapter
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "book_id": 6
+}
+
+### PUT Chapter Update
+PUT  {{host}}/chapter/98
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "title": "update title",
+  "content": "update content"
+}
+
+### DELETE Chapter
+DELETE  {{host}}/chapter/99
+Authorization: {{token}}

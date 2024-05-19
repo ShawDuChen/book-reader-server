@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Category } from "./category.entity";
 import { Chapter } from "./chapter.entity";
+import { Author } from "./author.entity";
 
 @Entity("book")
 export class Book {
@@ -30,6 +31,17 @@ export class Book {
 
   @OneToMany(() => Chapter, (chapter) => chapter.book)
   chapters?: Chapter[];
+
+  @Column()
+  author_id!: number;
+
+  @OneToOne(() => Author)
+  @JoinColumn({
+    name: "author_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "author_id",
+  })
+  author?: Author;
 
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;

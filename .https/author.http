@@ -1,0 +1,40 @@
+### GET List
+GET {{host}}/author?page=1&limit=10
+Authorization: {{token}}
+
+### GET Item By ID
+GET {{host}}/author/1
+Authorization: {{token}}
+
+### Post Create Item
+POST {{host}}/author
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "Shawdu",
+  "sex": "M",
+  "tel": "14666666666",
+  "status": 1
+}
+
+### PUT Update Item
+PUT {{host}}/author/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "Shawdu",
+  "sex": "M",
+  "tel": "15833333333",
+  "status": 1
+}
+
+### DELETE Item
+DELETE {{host}}/author/2
+Authorization: {{token}}
+
+
+### GET Author books by ID
+GET {{host}}/author/1/books
+Authorization: {{token}}

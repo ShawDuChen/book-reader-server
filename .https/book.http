@@ -1,0 +1,35 @@
+
+### Get Book List
+GET  {{host}}/book
+Authorization: {{token}}
+
+### Get Book by ID
+GET  {{host}}/book/6
+Authorization: {{token}}
+
+### POST Book
+POST {{host}}/book
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Book 2"
+}
+
+### PUT Book
+PUT  {{host}}/book/7
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Book Name 2",
+  "category_id": 1
+}
+
+### DELETE Book
+DELETE  {{host}}/book/8
+Authorization: {{token}}
+
+### GET Book Chapters By ID
+GET  {{host}}/book/6/chapters
+Authorization: {{token}}

@@ -44,6 +44,9 @@ export class User {
   })
   role?: Role;
 
+  @Column()
+  is_super?: string;
+
   @Column({ name: "created_by" })
   created_by!: string;
 

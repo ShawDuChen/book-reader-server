@@ -1,0 +1,36 @@
+
+### GET Category
+GET {{host}}/category
+Authorization: {{token}}
+
+
+### GET Category Info
+GET {{host}}/category/1
+Authorization: {{token}}
+
+
+### Category Create
+POST {{host}}/category
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "科幻类",
+  "identify": "category1",
+  "remark": "这是科幻类备注"
+}
+
+### Update Category
+PUT {{host}}/category/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "科幻类-更新",
+  "identify": "technology",
+  "remark": "这是科幻类备注"
+}
+
+### DELETE Category
+DELETE {{host}}/category/1
+Authorization: {{token}}

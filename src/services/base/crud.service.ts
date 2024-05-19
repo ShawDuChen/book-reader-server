@@ -36,7 +36,7 @@ export default class CrudService<T extends CrudServiceProps> {
     options?: FindOneOptions<T>,
   ) {
     const data = await this.repository.findOne({ where, ...options });
-    return data || ({ message: "unexist" } as unknown as T);
+    return data || ({ message: "query data not exist!" } as unknown as T);
   }
 
   async create(data: T) {

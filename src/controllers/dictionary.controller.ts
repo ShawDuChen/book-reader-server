@@ -31,12 +31,12 @@ export class DictionaryController {
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    return this.service.queryOne(
-      { id },
-      {
-        relations: ["dict_data_list"],
-      },
-    );
+    return this.service.queryOne({ id });
+  }
+
+  @Get("/:id/dict_data")
+  async queryDictDataList(@Param("id") id: number) {
+    return this.service.queryDictDataList(id);
   }
 
   @Post("/")
