@@ -7,6 +7,7 @@ import {
   ChapterController,
   RoleController,
   DictionaryController,
+  DictionaryDataController,
 } from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import ds from "./src/data-source";
@@ -32,6 +33,7 @@ const app = createExpressServer({
     CategoryController,
     LoggerController,
     DictionaryController,
+    DictionaryDataController,
   ],
   classTransformer: true,
   currentUserChecker: async (action: Action) => {
