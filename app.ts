@@ -11,6 +11,7 @@ import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import ds from "./src/data-source";
 import { logMiddleware } from "./src/middlewares/log";
 import { CategoryController } from "./src/controllers/category.controller";
+import { LoggerController } from "./src/controllers/log.controller";
 
 ds.initialize()
   .then(() => {
@@ -28,6 +29,7 @@ const app = createExpressServer({
     ChapterController,
     RoleController,
     CategoryController,
+    LoggerController,
   ],
   classTransformer: true,
   currentUserChecker: async (action: Action) => {

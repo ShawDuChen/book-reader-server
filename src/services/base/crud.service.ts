@@ -27,7 +27,6 @@ export default class CrudService<T extends CrudServiceProps> {
       where: rest as unknown as FindOneOptions<unknown>["where"],
       skip,
       take,
-      select: [""],
     });
     return { total, lists };
   }

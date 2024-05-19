@@ -15,6 +15,7 @@ export { default as ChapterService } from "./services/chapter.service";
 export { default as UserService } from "./services/user.service";
 export { default as RoleService } from "./services/role.service";
 export { default as CategoryService } from "./services/category.service";
+export { default as LoggerService } from "./services/log.service";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";
