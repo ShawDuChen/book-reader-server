@@ -11,17 +11,21 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import { BookService, Book } from "../export";
+import { BookService, Book, AuthorService, ChapterService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { CrawlInfo, PageQuery, TokenUser } from "../typing";
 
 @Controller("/book")
 @UseBefore(authenticateToken)
 export class BookController {
   service: BookService;
+  authorService: AuthorService;
+  chapterService: ChapterService;
 
   constructor() {
     this.service = new BookService();
+    this.authorService = new AuthorService();
+    this.chapterService = new ChapterService();
   }
 
   @Get("/")
@@ -63,5 +67,32 @@ export class BookController {
   @Delete("/:id")
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
+  }
+
+  @Post("/crawl")
+  @ContentType("application/json")
+  async crawlBook(@Body() body: CrawlInfo) {
+    const author = await this.authorService.findOneOrCrate(
+      { name: body.author_name },
+      { name: body.author_name },
+    );
+
+    const book = await this.service.findOneOrCrate(
+      { name: body.book_name },
+      { name: body.book_name, author_id: author.id, fetch_url: body.fetch_url },
+    );
+    const chapterList = await this.service.startCrawl(body);
+    for (let i = 0; i < chapterList.length; i++) {
+      const { no, title, url } = chapterList[i];
+      await this.chapterService.findOneOrCrate(
+        {
+          no,
+          title,
+          book_id: book.id,
+        },
+        { no, title, book_id: book.id, url },
+      );
+    }
+    return { message: "success", total: chapterList.length };
   }
 }

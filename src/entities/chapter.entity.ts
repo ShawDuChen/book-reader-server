@@ -13,6 +13,9 @@ export class Chapter {
   id!: number;
 
   @Column()
+  no!: string;
+
+  @Column()
   title!: string;
 
   @Column({ type: "text" })
@@ -28,6 +31,9 @@ export class Chapter {
     foreignKeyConstraintName: "book_id",
   })
   book?: Book;
+
+  @Column()
+  url?: string;
 
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;

@@ -33,3 +33,14 @@ Authorization: {{token}}
 ### GET Book Chapters By ID
 GET  {{host}}/book/6/chapters
 Authorization: {{token}}
+
+### POST Crawl Book
+POST {{host}}/book/crawl
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "fetch_url": "https://www.tangsanbooks.com/xs/tunshixingkong2",
+  "book_name": "吞噬星空2",
+  "author_name": "我吃西红柿"
+}

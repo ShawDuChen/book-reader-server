@@ -1,6 +1,7 @@
 import { FindOneOptions, ObjectLiteral, Repository } from "typeorm";
 import { PageQuery } from "../../typing";
 import { now } from "../../utils/time";
+import { HttpError } from "routing-controllers";
 
 interface CommonLiteral {
   id: number;
@@ -51,5 +52,19 @@ export default class CrudService<T extends CrudServiceProps> {
 
   async delete(id: number) {
     return this.repository.delete(id);
+  }
+
+  async findOneOrCrate(where: Partial<T>, data: Partial<T>) {
+    try {
+      const found = await this.repository.findOneBy(where);
+      if (found) {
+        return found;
+      } else {
+        const newData = this.repository.create(data as T);
+        return await this.repository.save(newData);
+      }
+    } catch (e: unknown) {
+      throw new HttpError(400);
+    }
   }
 }

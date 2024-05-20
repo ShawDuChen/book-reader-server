@@ -16,3 +16,10 @@ export interface CredentialsParams {
   username: string;
   password: string;
 }
+
+export interface CrawlInfo {
+  fetch_url: string;
+  book_name: string;
+  author_name: string;
+  offset?: number;
+}

@@ -60,4 +60,9 @@ export class ChapterController {
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
   }
+
+  @Get("/:id/crawl")
+  async crawlChapter(@Param("id") id: number) {
+    return this.service.crawlChapter(id);
+  }
 }

@@ -28,3 +28,8 @@ Authorization: {{token}}
 ### DELETE Chapter
 DELETE  {{host}}/chapter/99
 Authorization: {{token}}
+
+### GET Chapter Crawl
+GET {{host}}/chapter/1/crawl
+Authorization: {{token}}
+
