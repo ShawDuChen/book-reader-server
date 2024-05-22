@@ -5,6 +5,7 @@ import {
   CurrentUser,
   Delete,
   Get,
+  HttpError,
   Param,
   Post,
   Put,
@@ -13,7 +14,7 @@ import {
 } from "routing-controllers";
 import { UserService, User, userValidator } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { PageQuery, TokenUser, UpdatePasswordData } from "../typing";
 import { createHash } from "../utils/hash";
 
 @Controller("/user")
@@ -68,6 +69,26 @@ export class UserController {
       created_by: tokenUser.username,
     });
     return { ...newUser, password: undefined };
+  }
+
+  @Post("/update_password")
+  @ContentType("application/json")
+  async updatePassword(
+    @Body() data: UpdatePasswordData,
+    @CurrentUser() tokenUser: TokenUser,
+  ) {
+    const user = await this.service.queryOne({ username: tokenUser.username });
+    const password = createHash(data.password);
+    if (user.password !== password) {
+      return new HttpError(500, "密码错误");
+    }
+    if (data.password === data.confirm_password) {
+      return new HttpError(500, "新密码不能与旧密码相同");
+    }
+    return this.service.update(user.id, {
+      ...user,
+      password: createHash(data.confirm_password),
+    });
   }
 
   @Put("/:id")

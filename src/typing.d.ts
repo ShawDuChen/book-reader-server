@@ -30,3 +30,8 @@ export interface CrawlInfo {
 export interface TokenRequest extends Request {
   user?: TokenUser;
 }
+
+export interface UpdatePasswordData {
+  password: string;
+  confirm_password: string;
+}
