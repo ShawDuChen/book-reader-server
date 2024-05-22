@@ -21,6 +21,9 @@ export class Author {
   @OneToMany(() => Book, (book) => book.author)
   books?: Book[];
 
+  @Column()
+  remark?: string;
+
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;
 
