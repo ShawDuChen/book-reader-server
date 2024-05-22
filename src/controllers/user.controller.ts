@@ -34,6 +34,17 @@ export class UserController {
     return { total, lists: lists.map(({ password: _, ...item }) => item) };
   }
 
+  @Get("/info")
+  async getInfo(@CurrentUser() tokenUser: TokenUser) {
+    const { password: _, ...user } = await this.service.queryOne(
+      { username: tokenUser.username },
+      {
+        relations: ["role"],
+      },
+    );
+    return user;
+  }
+
   @Get("/:id")
   async queryById(@Param("id") id: number) {
     const user = await this.service.queryOne(
@@ -61,7 +72,6 @@ export class UserController {
 
   @Put("/:id")
   @ContentType("application/json")
-  // @UseBefore(...userValidator)
   async update(
     @Param("id") id: number,
     @Body() user: User,

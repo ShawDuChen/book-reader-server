@@ -28,7 +28,8 @@ export class LoginController {
     if (valid) {
       const token = jwt.sign(
         {
-          username: credentials.username,
+          username: valid.username,
+          nickname: valid.nickname,
           role: valid.role?.name,
           is_super: valid.is_super,
           expiresIn: Date.now() + ONE_DAY_TIMESTAMP,
@@ -51,6 +52,12 @@ export class LoginController {
   @UseBefore(...userValidator) //json(),
   async register(@Body() user: User) {
     const password = createHash(user.password);
-    return this.service.register({ ...user, password });
+    const nickname = this.getNickname(user.username);
+    return this.service.register({ ...user, password, nickname });
+  }
+
+  getNickname(username: string): string {
+    const index = username.indexOf("@");
+    return username.substring(0, index);
   }
 }

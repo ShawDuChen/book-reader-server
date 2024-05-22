@@ -1,3 +1,5 @@
+import type { Request } from "express";
+
 export type PageQuery<T = unknown> = {
   page: number;
   limit: number;
@@ -15,6 +17,7 @@ export interface TokenUser {
 export interface CredentialsParams {
   username: string;
   password: string;
+  nickname?: string;
 }
 
 export interface CrawlInfo {
@@ -22,4 +25,8 @@ export interface CrawlInfo {
   book_name: string;
   author_name: string;
   offset?: number;
+}
+
+export interface TokenRequest extends Request {
+  user?: TokenUser;
 }

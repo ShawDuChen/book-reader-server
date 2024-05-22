@@ -1,16 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import db from "../data-source";
 import { Logger } from "../export";
 import dayjs from "dayjs";
 import logger from "../logger";
-import { TokenUser } from "../typing";
-
-interface LoggerRequest extends Request {
-  user?: TokenUser;
-}
+import { TokenRequest } from "../typing";
 
 export const logMiddleware = async (
-  req: LoggerRequest,
+  req: TokenRequest,
   res: Response,
   next: NextFunction,
 ) => {

@@ -18,13 +18,12 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-
 ### User List
 GET {{host}}/user?page=1&limit=1
 Authorization: {{token}}
 
 ### Get User
-GET  {{host}}/user/57
+GET  {{host}}/user/62
 Authorization: {{token}}
 
 ### User Create
@@ -51,4 +50,9 @@ Authorization: {{token}}
 ### User Delete
 DELETE  {{host}}/user/55
 Authorization: {{token}}
-s
+
+
+### GET Info
+GET  {{host}}/user/info
+Authorization: {{token}}
+

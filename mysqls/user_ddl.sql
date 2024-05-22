@@ -1,8 +1,9 @@
--- Active: 1716033677212@@127.0.0.1@3306@book_reader
+-- Active: 1715415277331@@127.0.0.1@3306@book_reader
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL COMMENT '用户名',
   `password` varchar(100) NOT NULL COMMENT '登录密码',
+  `nickname` varchar(255) NOT NULL COMMENT '用户昵称',
   `sex` varchar(1) DEFAULT NULL COMMENT '性别',
   `tel` varchar(20) DEFAULT NULL COMMENT '手机号',
   `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
@@ -19,4 +20,4 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_no_uindex` (`username`),
   KEY `user_role` (`role_id`),
   CONSTRAINT `user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='用户表'
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户表'

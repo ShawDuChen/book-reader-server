@@ -19,6 +19,9 @@ export class User {
   password!: string;
 
   @Column()
+  nickname!: string;
+
+  @Column()
   sex!: string;
 
   @Column()
