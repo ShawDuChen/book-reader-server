@@ -9,6 +9,7 @@ import {
   DictionaryController,
   DictionaryDataController,
   AuthorController,
+  CodeController,
 } from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
 import ds from "./src/data-source";
@@ -36,6 +37,7 @@ const app = createExpressServer({
     DictionaryController,
     DictionaryDataController,
     AuthorController,
+    CodeController,
   ],
   classTransformer: true,
   currentUserChecker: async (action: Action) => {

@@ -1,0 +1,35 @@
+### Table List
+GET {{host}}/code?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/code/2
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/code
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "author"
+}
+
+### Table Update
+PUT {{host}}/code/2
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "author",
+  "columns": "[{\"dataIndex\":\"id\",\"title\":\"ID\",\"searchable\":true,\"changed\":true,\"type\": \"string\"}]"
+}
+
+### Table Delete
+DELETE {{host}}/code/1
+Authorization: {{token}}
+
+### Code Generate
+GET {{host}}/code/2/generate
+Authorization: {{token}}
+

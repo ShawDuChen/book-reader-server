@@ -1,4 +1,5 @@
 -- Active: 1715415277331@@127.0.0.1@3306@book_readerCREATE TABLE `author` (
+CREATE TABLE `author` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL COMMENT '作者名',
   `sex` varchar(1) DEFAULT NULL COMMENT '性别',
@@ -11,4 +12,4 @@
   `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='作者表'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='作者表'

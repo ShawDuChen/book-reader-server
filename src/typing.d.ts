@@ -35,3 +35,11 @@ export interface UpdatePasswordData {
   password: string;
   confirm_password: string;
 }
+
+export interface CodeColumn {
+  dataIndex: string;
+  title: string;
+  searchable: boolean;
+  changed: boolean;
+  type: string;
+}
