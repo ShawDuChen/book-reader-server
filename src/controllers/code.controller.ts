@@ -40,6 +40,11 @@ export class CodeController {
     };
   }
 
+  @Get("/all")
+  async quertAll() {
+    return this.service.getAll();
+  }
+
   @Get("/:id")
   async queryById(@Param("id") id: number) {
     const result = await this.service.queryOne({ id });

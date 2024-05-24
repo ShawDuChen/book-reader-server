@@ -35,6 +35,11 @@ export class UserController {
     return { total, lists: lists.map(({ password: _, ...item }) => item) };
   }
 
+  @Get("/all")
+  async quertAll() {
+    return this.service.getAll();
+  }
+
   @Get("/info")
   async getInfo(@CurrentUser() tokenUser: TokenUser) {
     const { password: _, ...user } = await this.service.queryOne(

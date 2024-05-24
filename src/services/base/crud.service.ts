@@ -20,6 +20,11 @@ export default class CrudService<T extends CrudServiceProps> {
     this.repository = repository;
   }
 
+  async getAll() {
+    const [lists] = await this.repository.findAndCount();
+    return lists;
+  }
+
   async queryList<T = null>(query: PageQuery<T>) {
     const { page, limit, ...rest } = query;
     const take = limit || 10;

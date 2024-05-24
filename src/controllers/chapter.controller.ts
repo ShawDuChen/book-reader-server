@@ -30,6 +30,11 @@ export class ChapterController {
     return { total, lists: lists.map(({ content: _, ...rest }) => rest) };
   }
 
+  @Get("/all")
+  async quertAll() {
+    return this.service.getAll();
+  }
+
   @Get("/:id")
   async queryById(@Param("id") id: number) {
     return this.service.queryOne(
