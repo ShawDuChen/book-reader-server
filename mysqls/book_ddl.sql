@@ -9,10 +9,11 @@ CREATE TABLE `book` (
   `updated_at` datetime DEFAULT NULL COMMENT 'Update Time',
   `updated_by` varchar(255) DEFAULT NULL COMMENT 'Update User',
   `fetch_url` varchar(255) DEFAULT NULL COMMENT 'fetch book url',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `book_category` (`category_id`),
   KEY `book_author` (`author_id`),
   CONSTRAINT `book_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`),
   CONSTRAINT `book_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='book'
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='book'

@@ -1,4 +1,9 @@
-import { FindOneOptions, ObjectLiteral, Repository } from "typeorm";
+import {
+  FindManyOptions,
+  FindOneOptions,
+  ObjectLiteral,
+  Repository,
+} from "typeorm";
 import { PageQuery } from "../../typing";
 import { now } from "../../utils/time";
 import { HttpError } from "routing-controllers";
@@ -25,7 +30,7 @@ export default class CrudService<T extends CrudServiceProps> {
     return lists;
   }
 
-  async queryList<T = null>(query: PageQuery<T>) {
+  async queryList<U = null>(query: PageQuery<U>, options?: FindManyOptions<T>) {
     const { page, limit, ...rest } = query;
     const take = limit || 10;
     const skip = ((page || 1) - 1) * take;
@@ -33,6 +38,7 @@ export default class CrudService<T extends CrudServiceProps> {
       where: rest as unknown as FindOneOptions<unknown>["where"],
       skip,
       take,
+      ...options,
     });
     return { total, lists };
   }

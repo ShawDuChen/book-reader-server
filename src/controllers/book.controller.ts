@@ -30,7 +30,9 @@ export class BookController {
 
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<Book>>) {
-    return this.service.queryList(query);
+    return this.service.queryList(query, {
+      relations: ["category", "author"],
+    });
   }
 
   @Get("/all")

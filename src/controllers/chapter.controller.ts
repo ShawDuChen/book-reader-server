@@ -26,7 +26,9 @@ export class ChapterController {
 
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<Chapter>>) {
-    const { total, lists } = await this.service.queryList(query);
+    const { total, lists } = await this.service.queryList(query, {
+      relations: ["book"],
+    });
     return { total, lists: lists.map(({ content: _, ...rest }) => rest) };
   }
 

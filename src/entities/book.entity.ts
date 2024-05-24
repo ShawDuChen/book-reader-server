@@ -46,6 +46,9 @@ export class Book {
   @Column()
   fetch_url?: string;
 
+  @Column()
+  remark?: string;
+
   @Column({ type: "datetime", name: "created_at" })
   created_at!: string;
 
