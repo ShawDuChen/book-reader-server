@@ -33,3 +33,9 @@ Authorization: {{token}}
 ### GET BY DICT TYPE
 GET {{host}}/dict_data/dict_type/2
 Authorization: {{token}}
+
+
+### GET all
+GET {{host}}/dict_data/all
+Authorization: {{token}}
+

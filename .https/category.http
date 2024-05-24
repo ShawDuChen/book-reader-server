@@ -34,3 +34,8 @@ Content-Type: application/json
 ### DELETE Category
 DELETE {{host}}/category/1
 Authorization: {{token}}
+
+### GET all
+GET {{host}}/category/all
+Authorization: {{token}}
+

@@ -38,3 +38,8 @@ Authorization: {{token}}
 ### GET Author books by ID
 GET {{host}}/author/1/books
 Authorization: {{token}}
+
+### GET all
+GET {{host}}/author/all
+Authorization: {{token}}
+

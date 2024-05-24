@@ -32,3 +32,7 @@ Content-Type: application/json
 DELETE {{host}}/log/190
 Authorization: {{token}}
 
+
+### GET all
+GET {{host}}/log/all
+Authorization: {{token}}

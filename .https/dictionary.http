@@ -38,3 +38,7 @@ Authorization: {{token}}
 ### GET Dictionary Data List
 GET {{host}}/dictionary/4/dict_data
 Authorization: {{token}}
+
+### GET Dicationaryy all
+GET {{host}}/dictionary/all
+Authorization: {{token}}

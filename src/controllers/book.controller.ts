@@ -33,6 +33,11 @@ export class BookController {
     return this.service.queryList(query);
   }
 
+  @Get("/all")
+  async quertAll() {
+    return this.service.getAll();
+  }
+
   @Get("/:id")
   async queryById(@Param("id") id: number) {
     return this.service.queryOne(
