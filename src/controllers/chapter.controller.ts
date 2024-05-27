@@ -11,7 +11,7 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import { ChapterService, Chapter } from "../export";
+import { ChapterService, Chapter, CrawlRuleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 
@@ -19,9 +19,10 @@ import { PageQuery, TokenUser } from "../typing";
 @UseBefore(authenticateToken)
 export class ChapterController {
   service: ChapterService;
-
+  crawlRuleService: CrawlRuleService;
   constructor() {
     this.service = new ChapterService();
+    this.crawlRuleService = new CrawlRuleService();
   }
 
   @Get("/")
@@ -70,6 +71,15 @@ export class ChapterController {
 
   @Get("/:id/crawl")
   async crawlChapter(@Param("id") id: number) {
-    return this.service.crawlChapter(id);
+    const chapter = await this.service.queryOne(
+      { id },
+      { relations: ["book"] },
+    );
+    const content_selector = chapter.book?.crawl_rule_id
+      ? await this.crawlRuleService
+          .queryOne({ id: chapter.book.crawl_rule_id })
+          .then((crawl_rule) => crawl_rule.content_selector)
+      : "";
+    return this.service.crawlChapter(chapter, content_selector);
   }
 }

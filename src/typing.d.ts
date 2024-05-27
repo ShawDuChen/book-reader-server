@@ -20,13 +20,6 @@ export interface CredentialsParams {
   nickname?: string;
 }
 
-export interface CrawlInfo {
-  fetch_url: string;
-  book_name?: string;
-  author_name?: string;
-  offset?: number;
-}
-
 export interface TokenRequest extends Request {
   user?: TokenUser;
 }

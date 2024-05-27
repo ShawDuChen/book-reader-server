@@ -14,7 +14,7 @@ import {
 } from "routing-controllers";
 import { BookService, Book, AuthorService, ChapterService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
-import { CrawlInfo, PageQuery, TokenUser } from "../typing";
+import { PageQuery, TokenUser } from "../typing";
 
 @Controller("/book")
 @UseBefore(authenticateToken)
@@ -58,13 +58,11 @@ export class BookController {
 
   @Get("/:id/startCrawl")
   async startCrawl(@Param("id") id: number) {
-    const book = await this.service.queryOne({ id });
+    const book = await this.queryById(id);
     if (!book.fetch_url) {
       return new HttpError(400, "请先设置抓取地址");
     }
-    const chapterList = await this.service.startCrawl({
-      fetch_url: book.fetch_url,
-    });
+    const chapterList = await this.service.startCrawl(book);
     for (let i = 0; i < chapterList.length; i++) {
       const { no, title, url } = chapterList[i];
       await this.chapterService.findOneOrCrate(
