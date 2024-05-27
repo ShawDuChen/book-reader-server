@@ -1,6 +1,7 @@
 import path from "node:path";
 import { DataSource } from "typeorm";
 import { config } from "dotenv";
+import { Code, Logger } from "./export";
 
 const envConfigPath: Record<string, string> = {
   development: ".env.development",
@@ -18,9 +19,11 @@ const dataSource = new DataSource({
   username: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD,
   database: "book_reader",
-  entities: [path.join(__dirname, "/../**/*.entity.{js,ts}")],
+  // entities: [path.join(__dirname, "/../**/*.entity.{js,ts}")],
+  entities: [Code, Logger],
   entityPrefix: "",
   logging: true,
+  synchronize: true,
 });
 
 export default dataSource;

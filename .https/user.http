@@ -33,18 +33,18 @@ Content-Type: application/json
 
 {
   "username": "adminuser232@email.com",
-  "password": "12345678"
+  "password": "12345678",
+  "nickname": "User No.1"
 }
 
 ### User Update
-PUT  {{host}}/user/57
+PUT  {{host}}/user/2
 Content-Type: application/json
 Authorization: {{token}}
 
 {
   "sex": "M",
-  "tel": "13666666666",
-  "role_id": 7
+  "tel": "13666666666"
 }
 
 ### User Delete

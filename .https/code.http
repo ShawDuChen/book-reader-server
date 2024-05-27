@@ -36,3 +36,7 @@ Authorization: {{token}}
 ### GET all
 GET {{host}}/code/all
 Authorization: {{token}}
+
+### GET metadata
+GET {{host}}/code/1/metadata
+Authorization: {{token}}

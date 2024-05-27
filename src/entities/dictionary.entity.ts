@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { DictionaryData } from "./dict-data.entity";
 
 @Entity("dictionary")
@@ -6,30 +13,30 @@ export class Dictionary {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   name!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   identify!: string;
 
-  @Column()
+  @Column({ type: "int", default: 1 })
   status!: 1 | 0;
 
-  @Column()
+  @Column({ type: "varchar", length: 255, nullable: true })
   remark?: string;
 
   @OneToMany(() => DictionaryData, (dict_data) => dict_data.dictionary)
   dict_data_list?: DictionaryData[];
 
-  @Column({ type: "datetime", name: "created_at" })
-  created_at!: string;
+  @CreateDateColumn({ type: "datetime", name: "created_at", nullable: true })
+  created_at?: string;
 
-  @Column()
-  created_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  created_by?: string;
 
-  @Column({ type: "datetime", name: "updated_at" })
-  updated_at!: string;
+  @UpdateDateColumn({ type: "datetime", name: "updated_at", nullable: true })
+  updated_at?: string;
 
-  @Column()
-  updated_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  updated_by?: string;
 }

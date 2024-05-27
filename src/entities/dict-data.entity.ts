@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Dictionary } from "./dictionary.entity";
 
@@ -12,16 +14,16 @@ export class DictionaryData {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   value!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   label!: string;
 
-  @Column()
+  @Column({ type: "int" })
   dict_type!: number;
 
-  @OneToOne(() => Dictionary)
+  @ManyToOne(() => Dictionary)
   @JoinColumn({
     name: "dict_type",
     referencedColumnName: "id",
@@ -29,21 +31,21 @@ export class DictionaryData {
   })
   dictionary?: Dictionary;
 
-  @Column()
+  @Column({ type: "varchar", length: 1, nullable: true })
   status?: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 255, nullable: true })
   remark?: string;
 
-  @Column({ type: "datetime", name: "created_at" })
-  created_at!: string;
+  @CreateDateColumn({ type: "datetime", name: "created_at", nullable: true })
+  created_at?: string;
 
-  @Column()
-  created_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  created_by?: string;
 
-  @Column({ type: "datetime", name: "updated_at" })
-  updated_at!: string;
+  @UpdateDateColumn({ type: "datetime", name: "updated_at", nullable: true })
+  updated_at?: string;
 
-  @Column()
-  updated_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  updated_by?: string;
 }

@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Book } from "./book.entity";
 
@@ -12,16 +14,16 @@ export class Chapter {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   no!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   title!: string;
 
-  @Column({ type: "text" })
-  content!: string;
+  @Column({ type: "text", nullable: true })
+  content?: string;
 
-  @Column()
+  @Column({ type: "int" })
   book_id!: number;
 
   @OneToOne(() => Book)
@@ -32,18 +34,18 @@ export class Chapter {
   })
   book?: Book;
 
-  @Column()
+  @Column({ type: "varchar", length: 255, nullable: true })
   url?: string;
 
-  @Column({ type: "datetime", name: "created_at" })
-  created_at!: string;
+  @CreateDateColumn({ type: "datetime", name: "created_at", nullable: true })
+  created_at?: string;
 
-  @Column()
-  created_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  created_by?: string;
 
-  @Column({ type: "datetime", name: "updated_at" })
-  updated_at!: string;
+  @UpdateDateColumn({ type: "datetime", name: "updated_at", nullable: true })
+  updated_at?: string;
 
-  @Column()
-  updated_by!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  updated_by?: string;
 }

@@ -13,7 +13,9 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Book 2"
+  "name": "Book 2",
+  "category_id" : 1,
+  "author_id": 1
 }
 
 ### PUT Book

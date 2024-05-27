@@ -5,7 +5,6 @@ import {
   Repository,
 } from "typeorm";
 import { PageQuery } from "../../typing";
-import { now } from "../../utils/time";
 import { HttpError } from "routing-controllers";
 
 interface CommonLiteral {
@@ -52,13 +51,11 @@ export default class CrudService<T extends CrudServiceProps> {
   }
 
   async create(data: T) {
-    const created_at = now();
-    return this.repository.save({ ...data, created_at });
+    return this.repository.save(data);
   }
 
   async update(id: number, data: T) {
-    const updated_at = now();
-    return this.repository.update(id, { ...data, updated_at });
+    return this.repository.update(id, data);
   }
 
   async delete(id: number) {

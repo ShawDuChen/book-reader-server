@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Role } from "./role.entity";
 
@@ -12,34 +14,34 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ name: "username" })
+  @Column({ name: "username", type: "varchar", length: 32 })
   username!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   password!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 32 })
   nickname!: string;
 
-  @Column()
-  sex!: string;
+  @Column({ type: "varchar", length: 1, nullable: true })
+  sex?: string;
 
-  @Column()
-  tel!: string;
+  @Column({ type: "varchar", length: 11, nullable: true })
+  tel?: string;
 
-  @Column()
-  email!: string;
+  @Column({ type: "varchar", length: 64, nullable: true })
+  email?: string;
 
-  @Column()
-  address!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  address?: string;
 
-  @Column()
-  status!: string;
+  @Column({ type: "int", nullable: true, default: 1 })
+  status?: number;
 
-  @Column()
+  @Column({ type: "int", nullable: true })
   role_id?: number;
 
-  @OneToOne(() => Role)
+  @ManyToOne(() => Role)
   @JoinColumn({
     name: "role_id",
     referencedColumnName: "id",
@@ -47,18 +49,18 @@ export class User {
   })
   role?: Role;
 
-  @Column()
-  is_super?: string;
+  @Column({ type: "int", nullable: true, default: 0 })
+  is_super?: number;
 
-  @Column({ name: "created_by" })
-  created_by!: string;
+  @CreateDateColumn({ type: "datetime", name: "created_at", nullable: true })
+  created_at?: string;
 
-  @Column({ type: "datetime", name: "created_at" })
-  created_at!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  created_by?: string;
 
-  @Column({ name: "updated_by" })
-  updated_by!: string;
+  @UpdateDateColumn({ type: "datetime", name: "updated_at", nullable: true })
+  updated_at?: string;
 
-  @Column({ type: "datetime", name: "updated_at" })
-  updated_at!: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  updated_by?: string;
 }
