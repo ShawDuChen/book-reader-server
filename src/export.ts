@@ -1,3 +1,5 @@
+import { EntityTarget } from "typeorm";
+
 // Validator
 export { userValidator } from "./validators/user.validator";
 
@@ -12,7 +14,7 @@ import { Dictionary } from "./entities/dictionary.entity";
 import { DictionaryData } from "./entities/dict-data.entity";
 import { Author } from "./entities/author.entity";
 import { Code } from "./entities/code.entity";
-import { EntityTarget } from "typeorm";
+import { CrawlRule } from "./entities/crawl-rule.entity";
 
 export {
   Book,
@@ -25,6 +27,7 @@ export {
   DictionaryData,
   Author,
   Code,
+  CrawlRule,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -38,6 +41,7 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   dict_data: DictionaryData,
   author: Author,
   code: Code,
+  crawl_rule: CrawlRule,
 };
 
 // Services
@@ -51,6 +55,7 @@ export { default as DictionaryService } from "./services/dictionary.service";
 export { default as DictionaryDataService } from "./services/dict-data.service";
 export { default as AuthorService } from "./services/author.service";
 export { default as CodeService } from "./services/code.service";
+export { default as CrawlRuleService } from "./services/crawl-rule.service";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";

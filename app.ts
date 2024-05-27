@@ -1,38 +1,16 @@
+import path from "node:path";
 import { json, urlencoded } from "body-parser";
 import { Action, createExpressServer } from "routing-controllers";
-import {
-  UserController,
-  LoginController,
-  BookController,
-  ChapterController,
-  RoleController,
-  DictionaryController,
-  DictionaryDataController,
-  AuthorController,
-  CodeController,
-} from "./src/export";
 import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
-import ds from "./src/data-source";
 import { logMiddleware } from "./src/middlewares/log";
-import { CategoryController } from "./src/controllers/category.controller";
-import { LoggerController } from "./src/controllers/log.controller";
+import ds from "./src/data-source";
 
 ds.initialize()
   .then(() => {
     console.log("Data Source has been initialized!");
     const app = createExpressServer({
       controllers: [
-        UserController,
-        LoginController,
-        BookController,
-        ChapterController,
-        RoleController,
-        CategoryController,
-        LoggerController,
-        DictionaryController,
-        DictionaryDataController,
-        AuthorController,
-        CodeController,
+        path.join(__dirname, "./src/controllers/**/*.controller.{js,ts}"),
       ],
       classTransformer: true,
       currentUserChecker: async (action: Action) => {

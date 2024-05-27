@@ -10,6 +10,7 @@ import { Category } from "./category.entity";
 import { Chapter } from "./chapter.entity";
 import { Author } from "./author.entity";
 import CrudBaseEntity from "./tools/base-entity";
+import { CrawlRule } from "./crawl-rule.entity";
 
 @Entity("book")
 export class Book extends CrudBaseEntity {
@@ -46,4 +47,15 @@ export class Book extends CrudBaseEntity {
 
   @Column({ type: "varchar", length: 255, nullable: true, comment: "爬取URL" })
   fetch_url?: string;
+
+  @Column({ type: "int", comment: "爬取规则ID", nullable: true })
+  crawl_rule_id?: number;
+
+  @OneToOne(() => CrawlRule)
+  @JoinColumn({
+    name: "crawl_rule_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "crawl_rule_id",
+  })
+  crawl_rule?: CrawlRule;
 }

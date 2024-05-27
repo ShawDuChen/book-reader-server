@@ -12,9 +12,20 @@ export default class CodeGenerator {
   columns?: string | CodeColumn[];
   constructor(table_name: string, columns?: string | CodeColumn[]) {
     this.name = table_name;
-    this.table_name = `${table_name.toUpperCase().slice(0, 1)}${table_name.slice(1)}`;
+    this.table_name = this.getTableName(table_name);
     this.columns = columns;
     this.generate();
+  }
+
+  getTableName(str: string): string {
+    // 将下划线格式的字符串转为驼峰式
+    const camelCaseStr = str.replace(/_([a-z])/g, (match, p1) =>
+      p1.toUpperCase(),
+    );
+    // 将首字符大写
+    const capitalizedStr =
+      camelCaseStr.charAt(0).toUpperCase() + camelCaseStr.slice(1);
+    return capitalizedStr;
   }
 
   generate() {

@@ -1,0 +1,36 @@
+### Table List
+GET {{host}}/crawl_rule?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/crawl_rule/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/crawl_rule
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "站点名称",
+  "website_url": "https://wwww.example.com",
+  "list_selector": ".list-chapter li a",
+  "content_selector": ".article .article-box"
+}
+
+### Table Update
+PUT {{host}}/crawl_rule/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "站点名称-update",
+  "website_url": "https://wwww.example.com",
+  "list_selector": ".list-chapter li a",
+  "content_selector": ".article .article-box"
+}
+
+### Table Delete
+DELETE {{host}}/crawl_rule/1
+Authorization: {{token}}
+

@@ -32,7 +32,7 @@ export class BookController {
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<Book>>) {
     return this.service.queryList(query, {
-      relations: ["category", "author"],
+      relations: ["category", "author", "crawl_rule"],
     });
   }
 
@@ -46,7 +46,7 @@ export class BookController {
     return this.service.queryOne(
       { id },
       {
-        relations: ["category", "author"],
+        relations: ["category", "author", "crawl_rule"],
       },
     );
   }

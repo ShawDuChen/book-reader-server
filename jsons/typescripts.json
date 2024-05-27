@@ -3,7 +3,7 @@
     "prefix": "c-entity",
     "body": [
       "import { Column, Entity, PrimaryGeneratedColumn } from \"typeorm\";",
-      "import CrudBaseEntity from \"./base-entity\";",
+      "import CrudBaseEntity from \"./tools/base-entity\";",
       "",
       "@Entity(\"${1:book}\")",
       "export class ${2:Book} extends CrudBaseEntity {",
