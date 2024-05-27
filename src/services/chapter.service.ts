@@ -13,8 +13,8 @@ export default class ChapterService extends CrudService<Chapter> {
   async crawlChapter(id: number) {
     const chapter = await this.queryOne({ id });
     const content = await crawlChapterContent(chapter.url);
-    chapter.content = content || "";
-    await this.update(id, chapter);
-    return chapter;
+    const newChapter = { ...chapter, content: content || "" };
+    await this.update(id, newChapter);
+    return newChapter;
   }
 }

@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Book } from "./book.entity";
@@ -25,7 +25,7 @@ export class Chapter extends CrudBaseEntity {
   @Column({ type: "int", comment: "书本ID" })
   book_id!: number;
 
-  @OneToOne(() => Book)
+  @ManyToOne(() => Book)
   @JoinColumn({
     name: "book_id",
     referencedColumnName: "id",

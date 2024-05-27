@@ -22,8 +22,8 @@ export interface CredentialsParams {
 
 export interface CrawlInfo {
   fetch_url: string;
-  book_name: string;
-  author_name: string;
+  book_name?: string;
+  author_name?: string;
   offset?: number;
 }
 

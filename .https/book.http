@@ -37,15 +37,8 @@ GET  {{host}}/book/6/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-POST {{host}}/book/crawl
+GET {{host}}/book/3/startCrawl
 Authorization: {{token}}
-Content-Type: application/json
-
-{
-  "fetch_url": "https://www.tangsanbooks.com/xs/tunshixingkong2",
-  "book_name": "吞噬星空2",
-  "author_name": "我吃西红柿"
-}
 
 ### GET Dicationaryy all
 GET {{host}}/book/all

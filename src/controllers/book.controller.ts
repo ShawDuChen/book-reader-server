@@ -5,6 +5,7 @@ import {
   CurrentUser,
   Delete,
   Get,
+  HttpError,
   Param,
   Post,
   Put,
@@ -55,6 +56,29 @@ export class BookController {
     return this.service.queryChapters(id);
   }
 
+  @Get("/:id/startCrawl")
+  async startCrawl(@Param("id") id: number) {
+    const book = await this.service.queryOne({ id });
+    if (!book.fetch_url) {
+      return new HttpError(400, "请先设置抓取地址");
+    }
+    const chapterList = await this.service.startCrawl({
+      fetch_url: book.fetch_url,
+    });
+    for (let i = 0; i < chapterList.length; i++) {
+      const { no, title, url } = chapterList[i];
+      await this.chapterService.findOneOrCrate(
+        {
+          no,
+          title,
+          book_id: book.id,
+        },
+        { no, title, book_id: book.id, url },
+      );
+    }
+    return { message: "success", total: chapterList.length };
+  }
+
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Book, @CurrentUser() user: TokenUser) {
@@ -74,32 +98,5 @@ export class BookController {
   @Delete("/:id")
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
-  }
-
-  @Post("/crawl")
-  @ContentType("application/json")
-  async crawlBook(@Body() body: CrawlInfo) {
-    const author = await this.authorService.findOneOrCrate(
-      { name: body.author_name },
-      { name: body.author_name },
-    );
-
-    const book = await this.service.findOneOrCrate(
-      { name: body.book_name },
-      { name: body.book_name, author_id: author.id, fetch_url: body.fetch_url },
-    );
-    const chapterList = await this.service.startCrawl(body);
-    for (let i = 0; i < chapterList.length; i++) {
-      const { no, title, url } = chapterList[i];
-      await this.chapterService.findOneOrCrate(
-        {
-          no,
-          title,
-          book_id: book.id,
-        },
-        { no, title, book_id: book.id, url },
-      );
-    }
-    return { message: "success", total: chapterList.length };
   }
 }
