@@ -42,4 +42,5 @@ export interface CodeColumn {
   searchable: boolean;
   changed: boolean;
   type: string;
+  maxlength?: string;
 }

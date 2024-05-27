@@ -1,16 +1,15 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from "typeorm";
 import { Role } from "./role.entity";
+import CrudBaseEntity from "./tools/base-entity";
 
 @Entity("user")
-export class User {
+export class User extends CrudBaseEntity {
   @PrimaryGeneratedColumn({ comment: "ID" })
   id!: number;
 
@@ -51,29 +50,4 @@ export class User {
 
   @Column({ type: "int", nullable: true, default: 0, comment: "是否超管" })
   is_super?: number;
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "备注" })
-  remark?: string;
-
-  @CreateDateColumn({
-    type: "datetime",
-    name: "created_at",
-    nullable: true,
-    comment: "创建日期",
-  })
-  created_at?: string;
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "创建人" })
-  created_by?: string;
-
-  @UpdateDateColumn({
-    type: "datetime",
-    name: "updated_at",
-    nullable: true,
-    comment: "更新日期",
-  })
-  updated_at?: string;
-
-  @Column({ type: "varchar", nullable: true, comment: "最后操作人" })
-  updated_by?: string;
 }

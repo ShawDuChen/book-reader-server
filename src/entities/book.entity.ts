@@ -1,19 +1,18 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from "typeorm";
 import { Category } from "./category.entity";
 import { Chapter } from "./chapter.entity";
 import { Author } from "./author.entity";
+import CrudBaseEntity from "./tools/base-entity";
 
 @Entity("book")
-export class Book {
+export class Book extends CrudBaseEntity {
   @PrimaryGeneratedColumn({ comment: "ID" })
   id!: number;
 
@@ -47,29 +46,4 @@ export class Book {
 
   @Column({ type: "varchar", length: 255, nullable: true, comment: "爬取URL" })
   fetch_url?: string;
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "备注" })
-  remark?: string;
-
-  @CreateDateColumn({
-    type: "datetime",
-    name: "created_at",
-    nullable: true,
-    comment: "创建日期",
-  })
-  created_at?: string;
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "创建人" })
-  created_by?: string;
-
-  @UpdateDateColumn({
-    type: "datetime",
-    name: "updated_at",
-    nullable: true,
-    comment: "更新日期",
-  })
-  updated_at?: string;
-
-  @Column({ type: "varchar", nullable: true, comment: "最后操作人" })
-  updated_by?: string;
 }

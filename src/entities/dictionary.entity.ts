@@ -1,15 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { DictionaryData } from "./dict-data.entity";
+import CrudBaseEntity from "./tools/base-entity";
 
 @Entity("dictionary")
-export class Dictionary {
+export class Dictionary extends CrudBaseEntity {
   @PrimaryGeneratedColumn({ comment: "ID" })
   id!: number;
 
@@ -24,29 +18,4 @@ export class Dictionary {
 
   @OneToMany(() => DictionaryData, (dict_data) => dict_data.dictionary)
   dict_data_list?: DictionaryData[];
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "备注" })
-  remark?: string;
-
-  @CreateDateColumn({
-    type: "datetime",
-    name: "created_at",
-    nullable: true,
-    comment: "创建日期",
-  })
-  created_at?: string;
-
-  @Column({ type: "varchar", length: 255, nullable: true, comment: "创建人" })
-  created_by?: string;
-
-  @UpdateDateColumn({
-    type: "datetime",
-    name: "updated_at",
-    nullable: true,
-    comment: "更新日期",
-  })
-  updated_at?: string;
-
-  @Column({ type: "varchar", nullable: true, comment: "最后操作人" })
-  updated_by?: string;
 }

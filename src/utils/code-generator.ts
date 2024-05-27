@@ -96,7 +96,7 @@ export default searchs;`;
   createFormsCode() {
     const insertCode = this.createInsertCode(
       (column) =>
-        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入" /> }`,
+        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入" maxlength={${column.maxlength || 32}} />${column.changed ? ' rules:[{ required: true, message: "请输入' + column.title + '" }]' : ""} }`,
     );
     return `import { CrudProps } from "@/components";
 import { Input } from "antd";
@@ -150,14 +150,24 @@ export const delete${this.table_name} = (id: number) => {
     url: \`/${this.name}/\${id}\`,
     method: "delete",
   });
+};
+
+export const all${this.table_name} = () => {
+  return request<${this.table_name}[]>({
+    url: "/${this.name}/all",
+    method: "get",
+  });
 };`;
   }
 
-  createInsertCode(handler: (item: CodeColumn) => string) {
+  createInsertCode(
+    handler: (item: CodeColumn) => string,
+    filter: (_: CodeColumn) => boolean = () => true,
+  ) {
     const columns = this.columns;
     const insertCode: string[] = [];
     Array.isArray(columns) &&
-      columns.forEach((column) => {
+      columns.filter(filter).forEach((column) => {
         insertCode.push(handler(column));
       });
     return insertCode;

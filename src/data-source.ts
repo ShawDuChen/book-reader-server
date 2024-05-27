@@ -36,6 +36,7 @@ export function getMetaColumns<T = unknown>(
     searchable: !column.isNullable,
     changed: !column.isNullable,
     type: (column.type || "string") as string,
+    maxlength: column.length,
   }));
   return columns;
 }
