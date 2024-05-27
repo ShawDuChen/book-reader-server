@@ -96,7 +96,7 @@ export default searchs;`;
   createFormsCode() {
     const insertCode = this.createInsertCode(
       (column) =>
-        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入" maxlength={${column.maxlength || 32}} />${column.changed ? ' rules:[{ required: true, message: "请输入' + column.title + '" }]' : ""} }`,
+        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入${column.title}" maxLength={${column.maxlength || 32}}/>${column.changed ? ' ,rules:[{ required: true, message: "请输入' + column.title + '" }] ' : ""} }`,
     );
     return `import { CrudProps } from "@/components";
 import { Input } from "antd";
