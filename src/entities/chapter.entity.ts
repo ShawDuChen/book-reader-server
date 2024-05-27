@@ -11,19 +11,19 @@ import { Book } from "./book.entity";
 
 @Entity("chapter")
 export class Chapter {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: "ID" })
   id!: number;
 
-  @Column({ type: "varchar", length: 255 })
+  @Column({ type: "varchar", length: 255, comment: "章节编号" })
   no!: string;
 
-  @Column({ type: "varchar", length: 255 })
+  @Column({ type: "varchar", length: 255, comment: "章节标题" })
   title!: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "text", nullable: true, comment: "章节内容" })
   content?: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", comment: "书本ID" })
   book_id!: number;
 
   @OneToOne(() => Book)
@@ -34,18 +34,31 @@ export class Chapter {
   })
   book?: Book;
 
-  @Column({ type: "varchar", length: 255, nullable: true })
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "章节URL" })
   url?: string;
 
-  @CreateDateColumn({ type: "datetime", name: "created_at", nullable: true })
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "备注" })
+  remark?: string;
+
+  @CreateDateColumn({
+    type: "datetime",
+    name: "created_at",
+    nullable: true,
+    comment: "创建日期",
+  })
   created_at?: string;
 
-  @Column({ type: "varchar", length: 255, nullable: true })
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "创建人" })
   created_by?: string;
 
-  @UpdateDateColumn({ type: "datetime", name: "updated_at", nullable: true })
+  @UpdateDateColumn({
+    type: "datetime",
+    name: "updated_at",
+    nullable: true,
+    comment: "更新日期",
+  })
   updated_at?: string;
 
-  @Column({ type: "varchar", length: 255, nullable: true })
+  @Column({ type: "varchar", nullable: true, comment: "最后操作人" })
   updated_by?: string;
 }

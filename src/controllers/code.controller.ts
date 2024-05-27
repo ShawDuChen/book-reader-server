@@ -12,10 +12,11 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
-import { Code, CodeService } from "../export";
+import { Code, CodeService, EntitiesMap } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { CodeColumn, PageQuery, TokenUser } from "../typing";
 import CodeGenerator from "../utils/code-generator";
+import { getMetaColumns } from "../data-source";
 
 @Controller("/code")
 @UseBefore(authenticateToken)
@@ -60,7 +61,12 @@ export class CodeController {
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Code, @CurrentUser() user: TokenUser) {
-    return this.service.create({ ...body, created_by: user.username });
+    const columns = getMetaColumns(EntitiesMap[body.name]);
+    return this.service.create({
+      ...body,
+      columns: JSON.stringify(columns),
+      created_by: user.username,
+    });
   }
 
   @Put("/:id")
@@ -84,5 +90,13 @@ export class CodeController {
     if (!data.id) throw new NotFoundError();
     const codeGenerator = new CodeGenerator(data.name, data.columns);
     return codeGenerator.getCode();
+  }
+
+  @Get("/:id/metadata")
+  async getMeta(@Param("id") id: number) {
+    const data = await this.queryById(id);
+    if (!data.id) throw new NotFoundError();
+    const meta = getMetaColumns(EntitiesMap[data.name]);
+    return meta;
   }
 }

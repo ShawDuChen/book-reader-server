@@ -27,19 +27,11 @@ export default class CodeGenerator {
   }
 
   createInterfaceCode() {
-    const columns = this.columns;
-    const table_name = this.table_name;
-    let interface_code: string;
-    if (!columns || typeof columns === "string" || !columns.length) {
-      interface_code = "";
-    } else {
-      interface_code = columns?.reduce((prev, curr) => {
-        prev += `${curr.dataIndex}: ${curr.type};\n`;
-        return prev;
-      }, "");
-    }
-    return `interface ${table_name} {
-${interface_code}
+    const insertCode = this.createInsertCode(
+      (column) => `  ${column.dataIndex}: ${column.type};`,
+    );
+    return `interface ${this.table_name} {
+${insertCode.join("\n")}
 }`;
   }
 
@@ -72,62 +64,46 @@ export default function ${this.table_name}Page() {
   }
 
   createColumnsCode() {
-    const columns = this.columns;
-    const insertCode =
-      !columns || typeof columns === "string"
-        ? ""
-        : columns.reduce((prev, curr) => {
-            prev += `{ dataIndex: '${curr.dataIndex}', title: '${curr.title}',  },\n`;
-            return prev;
-          }, ``);
+    const insertCode = this.createInsertCode(
+      (column) =>
+        `  { dataIndex: '${column.dataIndex}', title: '${column.title}' }`,
+    );
     return `import { CrudProps } from "@/components";
 import { ${this.table_name} } from "app";
 
 const columns: CrudProps<${this.table_name}>["columns"] = [
-  ${insertCode}
+${insertCode.join(",\n")},
 ];
 export default columns;`;
   }
 
   createSearchCode() {
-    const columns = this.columns;
-    const insertCode =
-      !columns || typeof columns === "string"
-        ? ""
-        : columns
-            .filter((c) => c.searchable)
-            .reduce((prev, curr) => {
-              prev += `{ name: "${curr.dataIndex}", label: "${curr.title}", formItem: <Input placeholder="请输入" /> },\n`;
-              return prev;
-            }, ``);
+    const insertCode = this.createInsertCode(
+      (column) =>
+        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入" /> }`,
+    );
     return `import { CrudProps } from "@/components";
 import { Input } from "antd";
 import { ${this.table_name} } from "app";
 
 const searchs: CrudProps<${this.table_name}>["searchs"] = [
-  ${insertCode}
+${insertCode.join(",\n")},
 ];
 
 export default searchs;`;
   }
 
   createFormsCode() {
-    const columns = this.columns;
-    const insertCode =
-      !columns || typeof columns === "string"
-        ? ""
-        : columns
-            .filter((c) => c.changed)
-            .reduce((prev, curr) => {
-              prev += `{ name: "${curr.dataIndex}", label: "${curr.title}", formItem: <Input placeholder="请输入" /> },\n`;
-              return prev;
-            }, ``);
+    const insertCode = this.createInsertCode(
+      (column) =>
+        `  { name: "${column.dataIndex}", label: "${column.title}", formItem: <Input placeholder="请输入" /> }`,
+    );
     return `import { CrudProps } from "@/components";
 import { Input } from "antd";
 import { ${this.table_name} } from "app";
 
 const forms: CrudProps<${this.table_name}>["forms"] = [
-  ${insertCode}
+${insertCode.join(",\n")},
 ];
 
 export default forms;
@@ -175,6 +151,16 @@ export const delete${this.table_name} = (id: number) => {
     method: "delete",
   });
 };`;
+  }
+
+  createInsertCode(handler: (item: CodeColumn) => string) {
+    const columns = this.columns;
+    const insertCode: string[] = [];
+    Array.isArray(columns) &&
+      columns.forEach((column) => {
+        insertCode.push(handler(column));
+      });
+    return insertCode;
   }
 
   getCode() {

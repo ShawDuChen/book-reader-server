@@ -30,7 +30,7 @@ DELETE {{host}}/code/1
 Authorization: {{token}}
 
 ### Code Generate
-GET {{host}}/code/2/generate
+GET {{host}}/code/3/generate
 Authorization: {{token}}
 
 ### GET all

@@ -20,41 +20,40 @@ import { LoggerController } from "./src/controllers/log.controller";
 ds.initialize()
   .then(() => {
     console.log("Data Source has been initialized!");
+    const app = createExpressServer({
+      controllers: [
+        UserController,
+        LoginController,
+        BookController,
+        ChapterController,
+        RoleController,
+        CategoryController,
+        LoggerController,
+        DictionaryController,
+        DictionaryDataController,
+        AuthorController,
+        CodeController,
+      ],
+      classTransformer: true,
+      currentUserChecker: async (action: Action) => {
+        const token = getToken(action.request.headers.authorization);
+        const user = await verify(token);
+        return user;
+      },
+    });
+
+    app.use(logMiddleware);
+
+    app.use(authenticateToken);
+
+    app.use(json());
+
+    app.use(urlencoded({ extended: true }));
+
+    app.listen(7001, () => {
+      console.log("Server started on http://localhost:7001/");
+    });
   })
   .catch((e) => {
     console.log("Error during Data Source initialization: ", e);
   });
-
-const app = createExpressServer({
-  controllers: [
-    UserController,
-    LoginController,
-    BookController,
-    ChapterController,
-    RoleController,
-    CategoryController,
-    LoggerController,
-    DictionaryController,
-    DictionaryDataController,
-    AuthorController,
-    CodeController,
-  ],
-  classTransformer: true,
-  currentUserChecker: async (action: Action) => {
-    const token = getToken(action.request.headers.authorization);
-    const user = await verify(token);
-    return user;
-  },
-});
-
-app.use(logMiddleware);
-
-app.use(authenticateToken);
-
-app.use(json());
-
-app.use(urlencoded({ extended: true }));
-
-app.listen(7001, () => {
-  console.log("Server started on http://localhost:7001/");
-});

@@ -2,16 +2,43 @@
 export { userValidator } from "./validators/user.validator";
 
 // Entities
-export { Book } from "./entities/book.entity";
-export { Chapter } from "./entities/chapter.entity";
-export { User } from "./entities/user.entity";
-export { Logger } from "./entities/log.entity";
-export { Role } from "./entities/role.entity";
-export { Category } from "./entities/category.entity";
-export { Dictionary } from "./entities/dictionary.entity";
-export { DictionaryData } from "./entities/dict-data.entity";
-export { Author } from "./entities/author.entity";
-export { Code } from "./entities/code.entity";
+import { Book } from "./entities/book.entity";
+import { Chapter } from "./entities/chapter.entity";
+import { User } from "./entities/user.entity";
+import { Logger } from "./entities/log.entity";
+import { Role } from "./entities/role.entity";
+import { Category } from "./entities/category.entity";
+import { Dictionary } from "./entities/dictionary.entity";
+import { DictionaryData } from "./entities/dict-data.entity";
+import { Author } from "./entities/author.entity";
+import { Code } from "./entities/code.entity";
+import { EntityTarget } from "typeorm";
+
+export {
+  Book,
+  Chapter,
+  User,
+  Logger,
+  Role,
+  Category,
+  Dictionary,
+  DictionaryData,
+  Author,
+  Code,
+};
+
+export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
+  book: Book,
+  chapter: Chapter,
+  user: User,
+  logger: Logger,
+  role: Role,
+  category: Category,
+  dictionary: Dictionary,
+  dict_data: DictionaryData,
+  author: Author,
+  code: Code,
+};
 
 // Services
 export { default as BookService } from "./services/book.service";

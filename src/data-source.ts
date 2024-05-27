@@ -1,7 +1,7 @@
 import path from "node:path";
-import { DataSource } from "typeorm";
+import { DataSource, EntityTarget } from "typeorm";
 import { config } from "dotenv";
-import { Code, Logger } from "./export";
+import { CodeColumn } from "./typing";
 
 const envConfigPath: Record<string, string> = {
   development: ".env.development",
@@ -19,11 +19,25 @@ const dataSource = new DataSource({
   username: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD,
   database: "book_reader",
-  // entities: [path.join(__dirname, "/../**/*.entity.{js,ts}")],
-  entities: [Code, Logger],
+  entities: [path.join(__dirname, "/../**/*.entity.{js,ts}")],
   entityPrefix: "",
   logging: true,
   synchronize: true,
 });
+
+export function getMetaColumns<T = unknown>(
+  entity: EntityTarget<T>,
+): CodeColumn[] {
+  if (!entity) return [];
+  const meta = dataSource.getMetadata(entity);
+  const columns: CodeColumn[] = meta.columns.map((column) => ({
+    dataIndex: column.propertyName,
+    title: column.comment || column.propertyName,
+    searchable: !column.isNullable,
+    changed: !column.isNullable,
+    type: (column.type || "string") as string,
+  }));
+  return columns;
+}
 
 export default dataSource;
