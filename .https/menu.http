@@ -1,0 +1,43 @@
+### Table List
+GET {{host}}/menu?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/menu/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/menu
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "书籍管理",
+  "parent_id": 8,
+  "path": "system",
+  "icon": "HomeOutlined",
+  "component": "Outlet",
+  "visible": 1
+}
+
+### Table Update
+PUT {{host}}/menu/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "系统管理",
+  "parent_id": 0,
+  "path": "system",
+  "icon": "HomeOutlined",
+  "component": "Outlet",
+  "visible": 1
+}
+
+### Table Delete
+DELETE {{host}}/menu/1
+Authorization: {{token}}
+
+### Menu Tree
+GET {{host}}/menu/tree
+Authorization: {{token}}
