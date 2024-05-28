@@ -15,6 +15,7 @@ import { DictionaryData } from "./entities/dict-data.entity";
 import { Author } from "./entities/author.entity";
 import { Code } from "./entities/code.entity";
 import { CrawlRule } from "./entities/crawl-rule.entity";
+import { Menu } from "./entities/menu.entity";
 
 export {
   Book,
@@ -28,6 +29,7 @@ export {
   Author,
   Code,
   CrawlRule,
+  Menu,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -42,6 +44,7 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   author: Author,
   code: Code,
   crawl_rule: CrawlRule,
+  menu: Menu,
 };
 
 // Services
@@ -56,6 +59,7 @@ export { default as DictionaryDataService } from "./services/dict-data.service";
 export { default as AuthorService } from "./services/author.service";
 export { default as CodeService } from "./services/code.service";
 export { default as CrawlRuleService } from "./services/crawl-rule.service";
+export { default as MenuService } from "./services/menu.service";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";
