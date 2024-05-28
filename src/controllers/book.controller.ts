@@ -77,6 +77,18 @@ export class BookController {
     return { message: "success", total: chapterList.length };
   }
 
+  @Get("/:id/comments")
+  async queryComments(@Param("id") id: number) {
+    const book = await this.service.queryOne(
+      { id },
+      { relations: ["comments"] },
+    );
+    return {
+      total: book.comments?.length || 0,
+      lists: book.comments || [],
+    };
+  }
+
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Book, @CurrentUser() user: TokenUser) {

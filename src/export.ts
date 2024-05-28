@@ -16,6 +16,8 @@ import { Author } from "./entities/author.entity";
 import { Code } from "./entities/code.entity";
 import { CrawlRule } from "./entities/crawl-rule.entity";
 import { Menu } from "./entities/menu.entity";
+import { BookComment } from "./entities/book-comment.entity";
+import { BookReply } from "./entities/book-reply.entity";
 
 export {
   Book,
@@ -30,6 +32,8 @@ export {
   Code,
   CrawlRule,
   Menu,
+  BookComment,
+  BookReply,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -45,6 +49,8 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   code: Code,
   crawl_rule: CrawlRule,
   menu: Menu,
+  book_comment: BookComment,
+  book_reply: BookReply,
 };
 
 // Services
@@ -60,6 +66,8 @@ export { default as AuthorService } from "./services/author.service";
 export { default as CodeService } from "./services/code.service";
 export { default as CrawlRuleService } from "./services/crawl-rule.service";
 export { default as MenuService } from "./services/menu.service";
+export { default as BookCommentService } from "./services/book-comment.service";
+export { default as BookReplyService } from "./services/book-reply.service";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";

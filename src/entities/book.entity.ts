@@ -12,6 +12,7 @@ import { Chapter } from "./chapter.entity";
 import { Author } from "./author.entity";
 import CrudBaseEntity from "./tools/base-entity";
 import { CrawlRule } from "./crawl-rule.entity";
+import { BookComment } from "./book-comment.entity";
 
 @Entity("book")
 export class Book extends CrudBaseEntity {
@@ -59,4 +60,7 @@ export class Book extends CrudBaseEntity {
     foreignKeyConstraintName: "crawl_rule_id",
   })
   crawl_rule?: CrawlRule;
+
+  @OneToMany(() => BookComment, (comment) => comment.book)
+  comments?: BookComment[];
 }

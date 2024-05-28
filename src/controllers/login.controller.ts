@@ -28,6 +28,7 @@ export class LoginController {
     if (valid) {
       const token = jwt.sign(
         {
+          user_id: valid.id,
           username: valid.username,
           nickname: valid.nickname,
           role: valid.role?.name,

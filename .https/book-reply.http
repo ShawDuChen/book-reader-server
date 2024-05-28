@@ -1,0 +1,28 @@
+### GET List
+GET {{host}}/book_reply?page=1&limit=10
+Authorization: {{token}}
+
+### GET Item By ID
+GET {{host}}/book_reply/1
+Authorization: {{token}}
+
+### Post Create Item
+POST {{host}}/book_reply
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "comment_id": 3,
+  "content": "test content",
+  "user_id": 2
+}
+
+### PUT Update Item
+PUT {{host}}/book_reply/1
+Authorization: {{token}}
+Content-Type: application/json
+
+
+### DELETE Item
+DELETE {{host}}/book_reply/1
+Authorization: {{token}}

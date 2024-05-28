@@ -63,6 +63,30 @@ export class UserController {
     return ret;
   }
 
+  @Get("/:id/comments")
+  async queryComments(@Param("id") id: number) {
+    const user = await this.service.queryOne(
+      { id },
+      { relations: ["comments"] },
+    );
+    return {
+      total: user.comments?.length || 0,
+      lists: user.comments || [],
+    };
+  }
+
+  @Get("/:id/replies")
+  async queryReplies(@Param("id") id: number) {
+    const user = await this.service.queryOne(
+      { id },
+      { relations: ["replies"] },
+    );
+    return {
+      total: user.replies?.length || 0,
+      lists: user.replies || [],
+    };
+  }
+
   @Post("/")
   @ContentType("application/json")
   @UseBefore(...userValidator)

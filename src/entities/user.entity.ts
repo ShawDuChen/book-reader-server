@@ -3,10 +3,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Role } from "./role.entity";
 import CrudBaseEntity from "./tools/base-entity";
+import { BookComment } from "./book-comment.entity";
+import { BookReply } from "./book-reply.entity";
 
 @Entity("user")
 export class User extends CrudBaseEntity {
@@ -50,4 +53,10 @@ export class User extends CrudBaseEntity {
 
   @Column({ type: "int", nullable: true, default: 0, comment: "是否超管" })
   is_super?: number;
+
+  @OneToMany(() => BookComment, (comment) => comment.user)
+  comments?: BookComment[];
+
+  @OneToMany(() => BookReply, (reply) => reply.user)
+  replies?: BookReply[];
 }

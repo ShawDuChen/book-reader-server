@@ -13,9 +13,9 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Book 2",
-  "category_id" : 1,
-  "author_id": 1
+  "name": "Book",
+  "category_id" : 7,
+  "author_id": 4
 }
 
 ### PUT Book
@@ -44,3 +44,6 @@ Authorization: {{token}}
 GET {{host}}/book/all
 Authorization: {{token}}
 
+### GET Book Comments
+GET {{host}}/book/17/comments
+Authorization: {{token}}

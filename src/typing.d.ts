@@ -37,3 +37,9 @@ export interface CodeColumn {
   type: string;
   maxlength?: string;
 }
+
+export enum CommentType {
+  author = "author",
+  book = "book",
+  chapter = "chapter",
+}

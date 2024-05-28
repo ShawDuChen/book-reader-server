@@ -70,3 +70,11 @@ Content-Type: application/json
 ### GET all
 GET {{host}}/user/all
 Authorization: {{token}}
+
+### GET User Comment
+GET {{host}}/user/2/comments
+Authorization: {{token}}
+
+### GET User Replies
+GET {{host}}/user/2/replies
+Authorization: {{token}}
