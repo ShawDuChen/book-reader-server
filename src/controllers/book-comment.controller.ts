@@ -26,7 +26,9 @@ export class BookCommentController {
 
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<BookComment>>) {
-    return this.service.queryList(query);
+    return this.service.queryList(query, {
+      relations: ["book", "user"],
+    });
   }
 
   @Get("/all")
