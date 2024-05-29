@@ -1,0 +1,27 @@
+### GET List
+GET {{host}}/chapter_reply?page=1&limit=10
+Authorization: {{token}}
+
+### GET Item By ID
+GET {{host}}/chapter_reply/1
+Authorization: {{token}}
+
+### Post Create Item
+POST {{host}}/chapter_reply
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "comment_id": 2,
+  "content": "同意，逻辑线太不明确"
+}
+
+### PUT Update Item
+PUT {{host}}/chapter_reply/1
+Authorization: {{token}}
+Content-Type: application/json
+
+
+### DELETE Item
+DELETE {{host}}/chapter_reply/1
+Authorization: {{token}}

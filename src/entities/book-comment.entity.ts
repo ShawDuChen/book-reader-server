@@ -33,7 +33,7 @@ export class BookComment extends CrudBaseEntity {
   @JoinColumn({
     name: "user_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "user_comment_id",
+    foreignKeyConstraintName: "user_book_comment_id",
   })
   user?: User;
 

@@ -1,0 +1,36 @@
+### GET List
+GET {{host}}/chapter_comment?page=1&limit=10
+Authorization: {{token}}
+
+### GET Item By ID
+GET {{host}}/chapter_comment/1
+Authorization: {{token}}
+
+### Post Create Item
+POST {{host}}/chapter_comment
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "chapter_id": 1,
+  "content": "不如第一部"
+}
+
+### PUT Update Item
+PUT {{host}}/chapter_comment/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "chapter_id": 1,
+  "content": "内容还可以下"
+}
+
+### DELETE Item
+DELETE {{host}}/chapter_comment/1
+Authorization: {{token}}
+
+
+### GET Comment Replies
+GET  {{host}}/chapter_comment/3/replies
+Authorization: {{token}}

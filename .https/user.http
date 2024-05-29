@@ -72,9 +72,38 @@ GET {{host}}/user/all
 Authorization: {{token}}
 
 ### GET User Comment
-GET {{host}}/user/1/comments
+GET {{host}}/user/1/book_comments
 Authorization: {{token}}
 
 ### GET User Replies
-GET {{host}}/user/1/replies
+GET {{host}}/user/1/book_replies
+Authorization: {{token}}
+
+### GET User Comment
+GET {{host}}/user/1/book_comment_actions
+Authorization: {{token}}
+
+### GET User Replies
+GET {{host}}/user/1/book_reply_actions
+Authorization: {{token}}
+
+
+### GET User Comment
+GET {{host}}/user/1/chapter_comments
+Authorization: {{token}}
+
+### GET User Replies
+GET {{host}}/user/1/chapter_replies
+Authorization: {{token}}
+
+### GET User Comment
+GET {{host}}/user/1/chapter_comment_actions
+Authorization: {{token}}
+
+### GET User Replies
+GET {{host}}/user/1/chapter_reply_actions
+Authorization: {{token}}
+
+### ERROR GET
+GET {{host}}/user/1/error_type
 Authorization: {{token}}

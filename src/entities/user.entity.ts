@@ -11,6 +11,11 @@ import CrudBaseEntity from "./tools/base-entity";
 import { BookComment } from "./book-comment.entity";
 import { BookReply } from "./book-reply.entity";
 import { BookCommentAction } from "./book-comment-action.entity";
+import { BookReplyAction } from "./book-reply-action.entity";
+import { ChapterComment } from "./chapter-comment.entity";
+import { ChapterReply } from "./chapter-reply.entity";
+import { ChapterCommentAction } from "./chapter-comment-action.entity";
+import { ChapterReplyAction } from "./chapter-reply-action.entity";
 
 @Entity("user")
 export class User extends CrudBaseEntity {
@@ -56,11 +61,26 @@ export class User extends CrudBaseEntity {
   is_super?: number;
 
   @OneToMany(() => BookComment, (comment) => comment.user)
-  comments?: BookComment[];
+  book_comments?: BookComment[];
 
   @OneToMany(() => BookReply, (reply) => reply.user)
-  replies?: BookReply[];
+  book_replies?: BookReply[];
 
   @OneToMany(() => BookCommentAction, (action) => action.user)
-  comment_actions?: BookCommentAction[];
+  book_comment_actions?: BookCommentAction[];
+
+  @OneToMany(() => BookReplyAction, (action) => action.user)
+  book_reply_actions?: BookReplyAction[];
+
+  @OneToMany(() => ChapterComment, (comment) => comment.user)
+  chapter_comments?: ChapterComment[];
+
+  @OneToMany(() => ChapterReply, (reply) => reply.user)
+  chapter_replies?: ChapterReply[];
+
+  @OneToMany(() => ChapterCommentAction, (action) => action.user)
+  chapter_comment_actions?: ChapterCommentAction[];
+
+  @OneToMany(() => ChapterReplyAction, (action) => action.user)
+  chapter_reply_actions?: ChapterReplyAction[];
 }

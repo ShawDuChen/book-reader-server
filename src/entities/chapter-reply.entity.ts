@@ -7,12 +7,12 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import CrudBaseEntity from "./tools/base-entity";
-import { BookComment } from "./book-comment.entity";
 import { User } from "./user.entity";
-import { BookReplyAction } from "./book-reply-action.entity";
+import { ChapterReplyAction } from "./chapter-reply-action.entity";
+import { ChapterComment } from "./chapter-comment.entity";
 
-@Entity("book_reply")
-export class BookReply extends CrudBaseEntity {
+@Entity("chapter_reply")
+export class ChapterReply extends CrudBaseEntity {
   @PrimaryGeneratedColumn({ comment: "ID" })
   id!: number;
 
@@ -22,13 +22,13 @@ export class BookReply extends CrudBaseEntity {
   @Column({ type: "int", comment: "评论ID" })
   comment_id!: number;
 
-  @ManyToOne(() => BookComment)
+  @ManyToOne(() => ChapterComment)
   @JoinColumn({
     name: "comment_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "comment_id",
+    foreignKeyConstraintName: "chapter_reply_id",
   })
-  comment?: BookComment;
+  comment?: ChapterComment;
 
   @Column({ type: "int", comment: "回复人ID" })
   user_id!: number;
@@ -37,10 +37,10 @@ export class BookReply extends CrudBaseEntity {
   @JoinColumn({
     name: "user_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "user_book_reply_id",
+    foreignKeyConstraintName: "user_chapter_reply_id",
   })
   user?: User;
 
-  @OneToMany(() => BookReplyAction, (action) => action.reply)
-  actions?: BookReplyAction[];
+  @OneToMany(() => ChapterReplyAction, (action) => action.reply)
+  actions?: ChapterReplyAction[];
 }

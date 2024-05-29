@@ -1,0 +1,26 @@
+### Table List
+GET {{host}}/chapter_reply_action?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/chapter_reply_action/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/chapter_reply_action
+Authorization: {{token}}
+Content-Type: application/json
+
+
+
+### Table Update
+PUT {{host}}/chapter_reply_action/1
+Authorization: {{token}}
+Content-Type: application/json
+
+
+
+### Table Delete
+DELETE {{host}}/chapter_reply_action/1
+Authorization: {{token}}
+

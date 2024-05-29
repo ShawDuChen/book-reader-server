@@ -1,0 +1,32 @@
+### Table List
+GET {{host}}/chapter_comment_action?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/chapter_comment_action/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/chapter_comment_action
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "action": "LIKE",
+  "comment_id": 1
+}
+
+### Table Update
+PUT {{host}}/chapter_comment_action/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "action": "DISLIKE",
+  "comment_id": 1
+}
+
+### Table Delete
+DELETE {{host}}/chapter_comment_action/1
+Authorization: {{token}}
+

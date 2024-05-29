@@ -63,28 +63,33 @@ export class UserController {
     return ret;
   }
 
-  @Get("/:id/comments")
-  async queryComments(@Param("id") id: number) {
-    const user = await this.service.queryOne(
-      { id },
-      { relations: ["comments"] },
+  @Get("/:id/:relation")
+  async queryDataWithRelation(
+    @Param("id") id: number,
+    @Param("relation") relation: keyof User,
+  ) {
+    const pass_relations = [
+      "book_comments",
+      "book_replies",
+      "book_comment_actions",
+      "book_reply_actions",
+      "chapter_comments",
+      "chapter_replies",
+      "chapter_comment_actions",
+      "chapter_reply_actions",
+    ];
+    if (!relation || !pass_relations.includes(relation)) {
+      return { code: 400, message: "relation not found" };
+    }
+    const data = await this.service.queryOne(
+      {
+        id,
+      },
+      {
+        relations: [relation],
+      },
     );
-    return {
-      total: user.comments?.length || 0,
-      lists: user.comments || [],
-    };
-  }
-
-  @Get("/:id/replies")
-  async queryReplies(@Param("id") id: number) {
-    const user = await this.service.queryOne(
-      { id },
-      { relations: ["replies"] },
-    );
-    return {
-      total: user.replies?.length || 0,
-      lists: user.replies || [],
-    };
+    return data[relation] || [];
   }
 
   @Post("/")
