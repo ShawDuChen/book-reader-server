@@ -3,11 +3,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import CrudBaseEntity from "./tools/base-entity";
 import { BookComment } from "./book-comment.entity";
 import { User } from "./user.entity";
+import { BookReplyAction } from "./book-reply-action.entity";
 
 @Entity("book_reply")
 export class BookReply extends CrudBaseEntity {
@@ -38,4 +40,7 @@ export class BookReply extends CrudBaseEntity {
     foreignKeyConstraintName: "user_reply_id",
   })
   user?: User;
+
+  @OneToMany(() => BookReplyAction, (action) => action.reply)
+  actions?: BookReplyAction[];
 }

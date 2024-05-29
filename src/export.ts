@@ -19,6 +19,7 @@ import { Menu } from "./entities/menu.entity";
 import { BookComment } from "./entities/book-comment.entity";
 import { BookReply } from "./entities/book-reply.entity";
 import { BookCommentAction } from "./entities/book-comment-action.entity";
+import { BookReplyAction } from "./entities/book-reply-action.entity";
 
 export {
   Book,
@@ -36,6 +37,7 @@ export {
   BookComment,
   BookReply,
   BookCommentAction,
+  BookReplyAction,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -54,6 +56,7 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   book_comment: BookComment,
   book_reply: BookReply,
   book_comment_action: BookCommentAction,
+  book_reply_action: BookReplyAction,
 };
 
 // Services
@@ -72,6 +75,7 @@ export { default as MenuService } from "./services/menu.service";
 export { default as BookCommentService } from "./services/book-comment.service";
 export { default as BookReplyService } from "./services/book-reply.service";
 export { default as BookCommentActionService } from "./services/book-comment-action.service";
+export { default as BookReplyActionService } from "./services/book-reply-action.service";
 
 // Controllers
 export { BookController } from "./controllers/book.controller";

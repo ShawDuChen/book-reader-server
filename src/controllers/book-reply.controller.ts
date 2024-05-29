@@ -14,6 +14,7 @@ import {
 import { BookReply, BookReplyService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
+import { ActionType } from "../entities/book-reply-action.entity";
 
 @Controller("/book_reply")
 @UseBefore(authenticateToken)
@@ -26,9 +27,23 @@ export class BookReplyController {
 
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<BookReply>>) {
-    return this.service.queryList(query, {
-      relations: ["comment", "user"],
+    const { total, lists } = await this.service.queryList(query, {
+      relations: ["comment", "user", "actions"],
     });
+    return {
+      total,
+      lists: lists.map((item) => {
+        const like_count =
+          item.actions?.filter((action) => action.action === ActionType.LIKE)
+            .length || 0;
+        return {
+          ...item,
+          actions: undefined,
+          like_count,
+          dislike_count: (item.actions?.length || 0) - like_count,
+        };
+      }),
+    };
   }
 
   @Get("/all")
@@ -38,12 +53,17 @@ export class BookReplyController {
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    return this.service.queryOne(
+    const item = await this.service.queryOne(
       { id },
       {
-        relations: ["comment", "user"],
+        relations: ["comment", "user", "actions"],
       },
     );
+    const like_count =
+      item.actions?.filter((action) => action.action === ActionType.LIKE)
+        .length || 0;
+    const dislike_count = (item.actions?.length || 0) - like_count;
+    return { ...item, actions: undefined, like_count, dislike_count };
   }
 
   @Post("/")
