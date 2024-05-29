@@ -45,5 +45,5 @@ GET {{host}}/book/all
 Authorization: {{token}}
 
 ### GET Book Comments
-GET {{host}}/book/17/comments
+GET {{host}}/book/1/comments
 Authorization: {{token}}

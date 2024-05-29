@@ -72,9 +72,9 @@ GET {{host}}/user/all
 Authorization: {{token}}
 
 ### GET User Comment
-GET {{host}}/user/2/comments
+GET {{host}}/user/1/comments
 Authorization: {{token}}
 
 ### GET User Replies
-GET {{host}}/user/2/replies
+GET {{host}}/user/1/replies
 Authorization: {{token}}

@@ -12,9 +12,8 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "comment_id": 3,
-  "content": "test content",
-  "user_id": 2
+  "comment_id": 2,
+  "content": "同意，逻辑线太不明确"
 }
 
 ### PUT Update Item

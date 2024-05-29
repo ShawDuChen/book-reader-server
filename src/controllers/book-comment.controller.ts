@@ -56,7 +56,11 @@ export class BookCommentController {
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: BookComment, @CurrentUser() user: TokenUser) {
-    return this.service.create({ ...body, created_by: user.username });
+    return this.service.create({
+      ...body,
+      user_id: user.user_id,
+      created_by: user.username,
+    });
   }
 
   @Put("/:id")
@@ -66,7 +70,11 @@ export class BookCommentController {
     @Body() body: BookComment,
     @CurrentUser() user: TokenUser,
   ) {
-    return this.service.update(id, { ...body, updated_by: user.username });
+    return this.service.update(id, {
+      ...body,
+      user_id: user.user_id,
+      updated_by: user.username,
+    });
   }
 
   @Delete("/:id")

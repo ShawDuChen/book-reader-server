@@ -11,6 +11,12 @@ import { User } from "./user.entity";
 import { Book } from "./book.entity";
 import { BookReply } from "./book-reply.entity";
 
+export enum CommentStatus {
+  pending = 0,
+  fulfilled = 1,
+  rejected = 2,
+}
+
 @Entity("book_comment")
 export class BookComment extends CrudBaseEntity {
   @PrimaryGeneratedColumn({ comment: "ID" })
@@ -46,6 +52,14 @@ export class BookComment extends CrudBaseEntity {
 
   @Column({ type: "int", comment: "点踩数", default: 0, nullable: true })
   dislike_count?: number;
+
+  @Column({
+    type: "enum",
+    comment: "审核状态",
+    default: CommentStatus.pending,
+    enum: CommentStatus,
+  })
+  status?: CommentStatus;
 
   @OneToMany(() => BookReply, (reply) => reply.comment)
   replies?: BookReply[];
