@@ -26,7 +26,9 @@ export class BookReplyController {
 
   @Get("/")
   async queryList(@QueryParams() query: PageQuery<Partial<BookReply>>) {
-    return this.service.queryList(query);
+    return this.service.queryList(query, {
+      relations: ["comment", "user"],
+    });
   }
 
   @Get("/all")
@@ -36,7 +38,12 @@ export class BookReplyController {
 
   @Get("/:id")
   async queryById(@Param("id") id: number) {
-    return this.service.queryOne({ id });
+    return this.service.queryOne(
+      { id },
+      {
+        relations: ["comment", "user"],
+      },
+    );
   }
 
   @Post("/")

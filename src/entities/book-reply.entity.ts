@@ -38,10 +38,4 @@ export class BookReply extends CrudBaseEntity {
     foreignKeyConstraintName: "user_reply_id",
   })
   user?: User;
-
-  @Column({ type: "int", comment: "点赞数", default: 0, nullable: true })
-  like_count?: number;
-
-  @Column({ type: "int", comment: "点踩数", default: 0, nullable: true })
-  dislike_count?: number;
 }

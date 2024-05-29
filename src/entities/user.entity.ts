@@ -10,6 +10,7 @@ import { Role } from "./role.entity";
 import CrudBaseEntity from "./tools/base-entity";
 import { BookComment } from "./book-comment.entity";
 import { BookReply } from "./book-reply.entity";
+import { BookCommentAction } from "./book-comment-action.entity";
 
 @Entity("user")
 export class User extends CrudBaseEntity {
@@ -59,4 +60,7 @@ export class User extends CrudBaseEntity {
 
   @OneToMany(() => BookReply, (reply) => reply.user)
   replies?: BookReply[];
+
+  @OneToMany(() => BookCommentAction, (action) => action.user)
+  comment_actions?: BookCommentAction[];
 }

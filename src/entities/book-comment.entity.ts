@@ -10,6 +10,7 @@ import CrudBaseEntity from "./tools/base-entity";
 import { User } from "./user.entity";
 import { Book } from "./book.entity";
 import { BookReply } from "./book-reply.entity";
+import { BookCommentAction } from "./book-comment-action.entity";
 
 export enum CommentStatus {
   pending = 0,
@@ -47,12 +48,6 @@ export class BookComment extends CrudBaseEntity {
   })
   book?: Book;
 
-  @Column({ type: "int", comment: "点赞数", default: 0, nullable: true })
-  like_count?: number;
-
-  @Column({ type: "int", comment: "点踩数", default: 0, nullable: true })
-  dislike_count?: number;
-
   @Column({
     type: "enum",
     comment: "审核状态",
@@ -63,4 +58,7 @@ export class BookComment extends CrudBaseEntity {
 
   @OneToMany(() => BookReply, (reply) => reply.comment)
   replies?: BookReply[];
+
+  @OneToMany(() => BookCommentAction, (action) => action.comment)
+  actions?: BookCommentAction[];
 }
