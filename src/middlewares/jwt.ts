@@ -2,7 +2,7 @@ import { expressjwt } from "express-jwt";
 import { JWT_SECRET } from "@/config";
 import jwt from "jsonwebtoken";
 
-const whilteList = ["/", "/auth/login", "/auth/register"];
+const whilteList = ["/", "/auth/login", "/auth/register", "/swagger-docs"];
 
 export const getToken = (authorization?: string) => {
   if (authorization && authorization.split(" ")[0] === "Bearer") {

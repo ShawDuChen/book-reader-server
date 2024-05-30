@@ -19,7 +19,7 @@ const dataSource = new DataSource({
   username: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD,
   database: "book_reader",
-  entities: [path.join(__dirname, "/../**/*.entity.{js,ts}")],
+  entities: [path.join(__dirname, "./entities/**/*.entity.{js,ts}")],
   entityPrefix: "",
   logging: true,
   synchronize: true,

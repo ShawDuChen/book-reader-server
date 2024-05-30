@@ -4,6 +4,7 @@ import { Action, createExpressServer } from "routing-controllers";
 import { authenticateToken, getToken, verify } from "@/middlewares/jwt";
 import { logMiddleware } from "@/middlewares/log";
 import ds from "@/data-source";
+import { swaggerUi, spec } from "@/swagger";
 
 ds.initialize()
   .then(() => {
@@ -19,6 +20,8 @@ ds.initialize()
         return user;
       },
     });
+
+    app.use("/swagger-docs", swaggerUi.serve, swaggerUi.setup(spec));
 
     app.use(logMiddleware);
 
