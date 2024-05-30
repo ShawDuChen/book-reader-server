@@ -10,7 +10,6 @@ import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
 import { UserService, User, userValidator } from "@/export";
 import { createHash } from "../utils/hash";
-import { CredentialsParams } from "@/typing";
 
 @Controller("/auth")
 export class LoginController {
@@ -23,7 +22,9 @@ export class LoginController {
   @Post("/login")
   @ContentType("application/json")
   @UseBefore(...userValidator)
-  async login(@Body() credentials: CredentialsParams) {
+  async login(
+    @Body() credentials: Pick<User, "username" | "password" | "nickname">,
+  ) {
     const valid = await this.validateUser(credentials);
     if (valid) {
       const token = jwt.sign(
@@ -43,7 +44,9 @@ export class LoginController {
       throw new BadRequestError("Invalid creentials");
     }
   }
-  async validateUser(credentials: CredentialsParams) {
+  async validateUser(
+    credentials: Pick<User, "username" | "password" | "nickname">,
+  ) {
     const password = createHash(credentials.password);
     return this.service.login({ ...credentials, password });
   }

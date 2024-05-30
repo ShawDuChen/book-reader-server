@@ -15,12 +15,6 @@ export interface TokenUser {
   exp: number;
 }
 
-export interface CredentialsParams {
-  username: string;
-  password: string;
-  nickname?: string;
-}
-
 export interface TokenRequest extends Request {
   user?: TokenUser;
 }
