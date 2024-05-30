@@ -3,7 +3,7 @@ import {
   ContentType,
   Controller,
   Post,
-  UnauthorizedError,
+  BadRequestError,
   UseBefore,
 } from "routing-controllers";
 import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
@@ -33,14 +33,14 @@ export class LoginController {
           nickname: valid.nickname,
           role: valid.role?.name,
           is_super: valid.is_super,
-          expiresIn: Date.now() + ONE_DAY_TIMESTAMP,
+          expiresIn: 7 * ONE_DAY_TIMESTAMP + Date.now(),
         },
         JWT_SECRET,
-        { expiresIn: "24h" },
+        { expiresIn: "7d" },
       );
       return { token };
     } else {
-      throw new UnauthorizedError("Invalid creentials");
+      throw new BadRequestError("Invalid creentials");
     }
   }
   async validateUser(credentials: CredentialsParams) {
