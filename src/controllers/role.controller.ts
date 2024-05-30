@@ -45,6 +45,12 @@ export class RoleController extends BaseHelper<Role> {
     return this.service.queryOne({ id });
   }
 
+  @Get("/:id/menus")
+  async queryMenus(@Param("id") id: number) {
+    const role = await this.service.queryOne({ id }, { relations: ["menus"] });
+    return role.menus || [];
+  }
+
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Role, @CurrentUser() user: TokenUser) {
