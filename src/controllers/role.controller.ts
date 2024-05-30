@@ -12,19 +12,22 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { Role, RoleService } from "../export";
+import { MenuService, Role, RoleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
+import { In } from "typeorm";
 @Controller("/role")
 @UseBefore(authenticateToken)
 export class RoleController extends BaseHelper<Role> {
   service: RoleService;
+  menuService: MenuService;
 
   constructor() {
     super();
     this.service = new RoleService();
+    this.menuService = new MenuService();
   }
 
   @Get("/")
@@ -52,6 +55,30 @@ export class RoleController extends BaseHelper<Role> {
   @ContentType("application/json")
   async exportExcel(@Res() res: Response, @Body() body: Partial<Role>) {
     return this.export(this.service, res, body);
+  }
+
+  @Post("/:id/bind_menus")
+  @ContentType("application/json")
+  async bindMenus(
+    @Param("id") id: number,
+    @Body() body: { ids: number[] },
+    @CurrentUser() user: TokenUser,
+  ) {
+    const role = await this.service.queryOne(
+      { id },
+      {
+        relations: ["menus"],
+      },
+    );
+    const menus = await this.menuService.find({
+      where: {
+        id: In(body.ids),
+      },
+    });
+    role.menus = [...menus];
+    role.updated_by = user.username;
+    await this.service.save(role);
+    return role;
   }
 
   @Put("/:id")

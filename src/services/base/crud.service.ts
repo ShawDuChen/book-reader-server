@@ -44,6 +44,11 @@ export default class CrudService<T extends CrudServiceProps> {
     return { total, lists };
   }
 
+  async find(options?: FindManyOptions<T>) {
+    const lists = await this.repository.find(options);
+    return lists;
+  }
+
   async queryOne(
     where: FindOneOptions<T>["where"],
     options?: FindOneOptions<T>,
@@ -53,6 +58,10 @@ export default class CrudService<T extends CrudServiceProps> {
   }
 
   async create(data: T) {
+    return this.repository.save(data);
+  }
+
+  async save(data: T) {
     return this.repository.save(data);
   }
 

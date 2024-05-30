@@ -49,3 +49,13 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+
+### Bind Role
+POST {{host}}/menu/20/bind_roles
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "ids": [1]
+}

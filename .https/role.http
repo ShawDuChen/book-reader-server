@@ -43,3 +43,12 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### POST Bind Menus
+POST {{host}}/role/1/bind_menus
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "ids": [1,2,3,4,5,6]
+}

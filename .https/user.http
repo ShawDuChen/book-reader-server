@@ -115,3 +115,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### GET User Menu
+GET {{host}}/user/menus
+Authorization: {{token}}

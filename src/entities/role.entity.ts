@@ -1,6 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { User } from "./user.entity";
 import CrudBaseEntity from "./tools/base-entity";
+import { Menu } from "./menu.entity";
 
 @Entity("role")
 export class Role extends CrudBaseEntity {
@@ -15,4 +23,7 @@ export class Role extends CrudBaseEntity {
 
   @OneToMany(() => User, (user) => user.role)
   users?: User[];
+
+  @ManyToMany(() => Menu, (menu) => menu.roles)
+  menus?: Menu[];
 }

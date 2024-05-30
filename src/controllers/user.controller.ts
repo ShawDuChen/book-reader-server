@@ -13,7 +13,7 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { UserService, User, userValidator } from "../export";
+import { UserService, User, userValidator, RoleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser, UpdatePasswordData } from "../typing";
 import { createHash } from "../utils/hash";
@@ -23,10 +23,11 @@ import { Response } from "express";
 @UseBefore(authenticateToken)
 export class UserController extends BaseHelper<User> {
   service: UserService;
-
+  roleService: RoleService;
   constructor() {
     super();
     this.service = new UserService();
+    this.roleService = new RoleService();
   }
 
   @Get("/")
@@ -34,7 +35,9 @@ export class UserController extends BaseHelper<User> {
     @QueryParams()
     query: PageQuery<{ username?: string }>,
   ) {
-    const { total, lists } = await this.service.queryList(query);
+    const { total, lists } = await this.service.queryList(query, {
+      relations: ["role"],
+    });
     return { total, lists: lists.map(({ password: _, ...item }) => item) };
   }
 
@@ -52,6 +55,14 @@ export class UserController extends BaseHelper<User> {
       },
     );
     return user;
+  }
+
+  @Get("/menus")
+  async getMenus(@CurrentUser() tokenUser: TokenUser) {
+    const user = await this.getInfo(tokenUser);
+    if (!user.role_id) return;
+    const menus = await this.roleService.getRoleMenus(user.role_id);
+    return menus;
   }
 
   @Get("/:id")

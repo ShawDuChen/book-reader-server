@@ -1,5 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import CrudBaseEntity from "./tools/base-entity";
+import { Role } from "./role.entity";
 
 @Entity("menu")
 export class Menu extends CrudBaseEntity {
@@ -26,4 +33,12 @@ export class Menu extends CrudBaseEntity {
 
   @Column({ type: "int", default: 0, comment: "排序" })
   order?: number;
+
+  @ManyToMany(() => Role, (role) => role.menus)
+  @JoinTable({
+    name: "role_menu",
+    joinColumn: { name: "menu_id", referencedColumnName: "id" },
+    inverseJoinColumn: { name: "role_id", referencedColumnName: "id" },
+  })
+  roles?: Role[];
 }
