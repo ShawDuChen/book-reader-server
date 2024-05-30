@@ -60,6 +60,12 @@ export class MenuController extends BaseHelper<Menu> {
     return { ...menu, parent_ids: parent_ids.length ? parent_ids : [0] };
   }
 
+  @Get("/:id/roles")
+  async queryRoles(@Param("id") id: number) {
+    const role = await this.service.queryOne({ id }, { relations: ["roles"] });
+    return role.roles || [];
+  }
+
   @Post("/")
   @ContentType("application/json")
   async create(@Body() body: Menu, @CurrentUser() user: TokenUser) {

@@ -59,3 +59,10 @@ Content-Type: application/json
 {
   "ids": [1]
 }
+
+
+### GET Query Bind Roles
+GET {{host}}/menu/5/roles
+Authorization: {{token}}
+
+
