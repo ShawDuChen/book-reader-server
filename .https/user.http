@@ -107,3 +107,11 @@ Authorization: {{token}}
 ### ERROR GET
 GET {{host}}/user/1/error_type
 Authorization: {{token}}
+
+
+### EXPORT 
+POST {{host}}/user/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

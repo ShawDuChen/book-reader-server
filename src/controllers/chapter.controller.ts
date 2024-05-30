@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { ChapterService, Chapter, CrawlRuleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/chapter")
 @UseBefore(authenticateToken)
-export class ChapterController {
+export class ChapterController extends BaseHelper<Chapter> {
   service: ChapterService;
   crawlRuleService: CrawlRuleService;
   constructor() {
+    super();
     this.service = new ChapterService();
     this.crawlRuleService = new CrawlRuleService();
   }
@@ -52,6 +55,12 @@ export class ChapterController {
   @ContentType("application/json")
   async create(@Body({}) body: Chapter, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Chapter>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

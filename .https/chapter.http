@@ -37,3 +37,10 @@ Authorization: {{token}}
 GET {{host}}/chapter/all
 Authorization: {{token}}
 
+
+### EXPORT 
+POST {{host}}/chapter/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

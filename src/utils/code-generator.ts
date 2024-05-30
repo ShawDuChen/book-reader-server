@@ -52,6 +52,8 @@ ${insertCode.join("\n")}
   delete${this.table_name},
   fetch${this.table_name}List,
   update${this.table_name},
+  export${this.table_name},
+  get${this.table_name},
 } from "@/api/business/${this.name}";
 import { Crud } from "@/components";
 import { ${this.table_name} } from "app";
@@ -65,6 +67,8 @@ export default function ${this.table_name}Page() {
       createApi={create${this.table_name}}
       updateApi={update${this.table_name}}
       deleteApi={delete${this.table_name}}
+      exportApi={export${this.table_name}}
+      infoApi={get${this.table_name}}
       queryKey="${this.name}"
       columns={columns}
       searchs={searchs}
@@ -167,6 +171,15 @@ export const all${this.table_name} = () => {
   return request<${this.table_name}[]>({
     url: "/${this.name}/all",
     method: "get",
+  });
+};
+
+export const export${this.table_name} = (data: Partial<${this.table_name}>) => {
+  return request<Blob>({
+    url: "/${this.name}/export",
+    method: "post",
+    data,
+    responseType: "blob",
   });
 };`;
   }

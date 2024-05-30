@@ -43,3 +43,10 @@ Authorization: {{token}}
 GET {{host}}/author/all
 Authorization: {{token}}
 
+
+### EXPORT 
+POST {{host}}/author/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

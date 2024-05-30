@@ -42,3 +42,11 @@ Authorization: {{token}}
 ### GET Dicationaryy all
 GET {{host}}/dictionary/all
 Authorization: {{token}}
+
+
+### EXPORT 
+POST {{host}}/dictionary/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

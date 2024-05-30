@@ -25,3 +25,10 @@ Content-Type: application/json
 ### DELETE Item
 DELETE {{host}}/book_reply/1
 Authorization: {{token}}
+
+### EXPORT 
+POST {{host}}/book_reply/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

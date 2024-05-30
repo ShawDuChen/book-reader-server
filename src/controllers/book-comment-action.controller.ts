@@ -9,18 +9,22 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { BookCommentAction, BookCommentActionService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 
 @Controller("/book_comment_action")
 @UseBefore(authenticateToken)
-export class BookCommentActionController {
+export class BookCommentActionController extends BaseHelper<BookCommentAction> {
   service: BookCommentActionService;
 
   constructor() {
+    super();
     this.service = new BookCommentActionService();
   }
 
@@ -50,6 +54,15 @@ export class BookCommentActionController {
       user_id: user.user_id,
       created_by: user.username,
     });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(
+    @Res() res: Response,
+    @Body() body: Partial<BookCommentAction>,
+  ) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

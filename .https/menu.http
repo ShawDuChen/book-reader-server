@@ -41,3 +41,11 @@ Authorization: {{token}}
 ### Menu Tree
 GET {{host}}/menu/tree
 Authorization: {{token}}
+
+
+### EXPORT 
+POST {{host}}/menu/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

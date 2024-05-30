@@ -10,6 +10,7 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { Code, CodeService, EntitiesMap } from "../export";
@@ -17,13 +18,15 @@ import { authenticateToken } from "../middlewares/jwt";
 import { CodeColumn, PageQuery, TokenUser } from "../typing";
 import CodeGenerator from "../utils/code-generator";
 import { getMetaColumns } from "../data-source";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/code")
 @UseBefore(authenticateToken)
-export class CodeController {
+export class CodeController extends BaseHelper<Code> {
   service: CodeService;
 
   constructor() {
+    super();
     this.service = new CodeService();
   }
 
@@ -67,6 +70,12 @@ export class CodeController {
       columns: JSON.stringify(columns),
       created_by: user.username,
     });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Code>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { Role, RoleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/role")
 @UseBefore(authenticateToken)
-export class RoleController {
+export class RoleController extends BaseHelper<Role> {
   service: RoleService;
 
   constructor() {
+    super();
     this.service = new RoleService();
   }
 
@@ -43,6 +46,12 @@ export class RoleController {
   @ContentType("application/json")
   async create(@Body() body: Role, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Role>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

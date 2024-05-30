@@ -30,3 +30,9 @@ Content-Type: application/json
 DELETE {{host}}/book_comment_action/1
 Authorization: {{token}}
 
+### EXPORT 
+POST {{host}}/book_comment_action/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

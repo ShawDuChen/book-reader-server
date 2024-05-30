@@ -39,3 +39,9 @@ Authorization: {{token}}
 GET {{host}}/category/all
 Authorization: {{token}}
 
+### EXPORT 
+POST {{host}}/category/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

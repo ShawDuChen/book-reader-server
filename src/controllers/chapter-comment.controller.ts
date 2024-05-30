@@ -9,19 +9,22 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { ChapterComment, ChapterCommentService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 import { ActionType } from "../entities/chapter-comment-action.entity";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/chapter_comment")
 @UseBefore(authenticateToken)
-export class ChapterCommentController {
+export class ChapterCommentController extends BaseHelper<ChapterComment> {
   service: ChapterCommentService;
 
   constructor() {
+    super();
     this.service = new ChapterCommentService();
   }
 
@@ -92,6 +95,15 @@ export class ChapterCommentController {
       user_id: user.user_id,
       created_by: user.username,
     });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(
+    @Res() res: Response,
+    @Body() body: Partial<ChapterComment>,
+  ) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

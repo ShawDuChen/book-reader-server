@@ -24,3 +24,9 @@ Content-Type: application/json
 DELETE {{host}}/book_reply_action/1
 Authorization: {{token}}
 
+### EXPORT 
+POST {{host}}/book_reply_action/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

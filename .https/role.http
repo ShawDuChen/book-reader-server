@@ -36,3 +36,10 @@ Authorization: {{token}}
 GET {{host}}/role/all
 Authorization: {{token}}
 
+
+### EXPORT 
+POST {{host}}/role/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

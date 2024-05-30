@@ -34,3 +34,10 @@ Content-Type: application/json
 DELETE {{host}}/crawl_rule/1
 Authorization: {{token}}
 
+
+### EXPORT 
+POST {{host}}/crawl_rule/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

@@ -9,19 +9,22 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { Menu, MenuService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
 import { listToTree } from "../utils/tree";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/menu")
 @UseBefore(authenticateToken)
-export class MenuController {
+export class MenuController extends BaseHelper<Menu> {
   service: MenuService;
 
   constructor() {
+    super();
     this.service = new MenuService();
   }
 
@@ -58,6 +61,12 @@ export class MenuController {
   @ContentType("application/json")
   async create(@Body() body: Menu, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Menu>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

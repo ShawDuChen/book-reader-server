@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { Logger, LoggerService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/log")
 @UseBefore(authenticateToken)
-export class LoggerController {
+export class LoggerController extends BaseHelper<Logger> {
   service: LoggerService;
 
   constructor() {
+    super();
     this.service = new LoggerService();
   }
 
@@ -43,6 +46,12 @@ export class LoggerController {
   @ContentType("application/json")
   async create(@Body() body: Logger, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Logger>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

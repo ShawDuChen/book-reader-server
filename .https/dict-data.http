@@ -39,3 +39,10 @@ Authorization: {{token}}
 GET {{host}}/dict_data/all
 Authorization: {{token}}
 
+
+### EXPORT 
+POST {{host}}/dict_data/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}

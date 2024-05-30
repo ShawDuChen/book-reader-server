@@ -10,20 +10,24 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { BookService, Book, AuthorService, ChapterService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 
 @Controller("/book")
 @UseBefore(authenticateToken)
-export class BookController {
+export class BookController extends BaseHelper<Book> {
   service: BookService;
   authorService: AuthorService;
   chapterService: ChapterService;
 
   constructor() {
+    super();
     this.service = new BookService();
     this.authorService = new AuthorService();
     this.chapterService = new ChapterService();
@@ -93,6 +97,12 @@ export class BookController {
   @ContentType("application/json")
   async create(@Body() body: Book, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Book>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

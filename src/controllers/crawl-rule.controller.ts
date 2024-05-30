@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { CrawlRule, CrawlRuleService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/crawl_rule")
 @UseBefore(authenticateToken)
-export class CrawlRuleController {
+export class CrawlRuleController extends BaseHelper<CrawlRule> {
   service: CrawlRuleService;
 
   constructor() {
+    super();
     this.service = new CrawlRuleService();
   }
 
@@ -48,6 +51,12 @@ export class CrawlRuleController {
   @ContentType("application/json")
   async create(@Body() body: CrawlRule, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<CrawlRule>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

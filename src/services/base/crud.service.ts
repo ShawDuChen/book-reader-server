@@ -6,6 +6,8 @@ import {
 } from "typeorm";
 import { PageQuery } from "../../typing";
 import { HttpError } from "routing-controllers";
+import { Workbook } from "exceljs";
+import { getMetaColumns } from "../../data-source";
 
 interface CommonLiteral {
   id: number;
@@ -15,7 +17,7 @@ interface CommonLiteral {
   updated_by?: string;
 }
 
-interface CrudServiceProps extends ObjectLiteral, CommonLiteral {}
+export interface CrudServiceProps extends ObjectLiteral, CommonLiteral {}
 
 export default class CrudService<T extends CrudServiceProps> {
   repository: Repository<T>;
@@ -74,5 +76,24 @@ export default class CrudService<T extends CrudServiceProps> {
     } catch (e: unknown) {
       throw new HttpError(400);
     }
+  }
+
+  async export(body: Partial<T>) {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet("Sheet 1");
+
+    const datas = await this.repository.find({ where: body });
+    const columns = getMetaColumns(this.repository.target);
+    worksheet.columns = columns.map((item) => {
+      return {
+        header: item.title,
+        key: item.dataIndex,
+        width: 20,
+      };
+    });
+    datas.forEach((data) => {
+      worksheet.addRow(data);
+    });
+    return workbook;
   }
 }

@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { DictionaryData, DictionaryDataService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/dict_data")
 @UseBefore(authenticateToken)
-export class DictionaryDataController {
+export class DictionaryDataController extends BaseHelper<DictionaryData> {
   service: DictionaryDataService;
 
   constructor() {
+    super();
     this.service = new DictionaryDataService();
   }
 
@@ -43,6 +46,15 @@ export class DictionaryDataController {
   @ContentType("application/json")
   async create(@Body() body: DictionaryData, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(
+    @Res() res: Response,
+    @Body() body: Partial<DictionaryData>,
+  ) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

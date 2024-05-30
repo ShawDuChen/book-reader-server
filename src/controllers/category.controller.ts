@@ -9,18 +9,21 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { Category, CategoryService } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser } from "../typing";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/category")
 @UseBefore(authenticateToken)
-export class CategoryController {
+export class CategoryController extends BaseHelper<Category> {
   service: CategoryService;
 
   constructor() {
+    super();
     this.service = new CategoryService();
   }
 
@@ -43,6 +46,12 @@ export class CategoryController {
   @ContentType("application/json")
   async create(@Body() body: Category, @CurrentUser() user: TokenUser) {
     return this.service.create({ ...body, created_by: user.username });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<Category>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

@@ -10,19 +10,22 @@ import {
   Post,
   Put,
   QueryParams,
+  Res,
   UseBefore,
 } from "routing-controllers";
 import { UserService, User, userValidator } from "../export";
 import { authenticateToken } from "../middlewares/jwt";
 import { PageQuery, TokenUser, UpdatePasswordData } from "../typing";
 import { createHash } from "../utils/hash";
-
+import BaseHelper from "./base/helper";
+import { Response } from "express";
 @Controller("/user")
 @UseBefore(authenticateToken)
-export class UserController {
+export class UserController extends BaseHelper<User> {
   service: UserService;
 
   constructor() {
+    super();
     this.service = new UserService();
   }
 
@@ -123,6 +126,12 @@ export class UserController {
       ...user,
       password: createHash(data.confirm_password),
     });
+  }
+
+  @Post("/export")
+  @ContentType("application/json")
+  async exportExcel(@Res() res: Response, @Body() body: Partial<User>) {
+    return this.export(this.service, res, body);
   }
 
   @Put("/:id")

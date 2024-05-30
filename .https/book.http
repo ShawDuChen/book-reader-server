@@ -47,3 +47,10 @@ Authorization: {{token}}
 ### GET Book Comments
 GET {{host}}/book/1/comments
 Authorization: {{token}}
+
+### EXPORT 
+POST {{host}}/book/export
+Authorization: {{token}}
+Content-Type: application/json
+
+{}
