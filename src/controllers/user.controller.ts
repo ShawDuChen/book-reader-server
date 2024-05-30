@@ -38,7 +38,7 @@ export class UserController extends BaseHelper<User> {
     const { total, lists } = await this.service.queryList(query, {
       relations: ["role"],
     });
-    return { total, lists: lists.map(({ password: _, ...item }) => item) };
+    return { total, lists };
   }
 
   @Get("/all")
@@ -48,7 +48,7 @@ export class UserController extends BaseHelper<User> {
 
   @Get("/info")
   async getInfo(@CurrentUser() tokenUser: TokenUser) {
-    const { password: _, ...user } = await this.service.queryOne(
+    const user = await this.service.queryOne(
       { username: tokenUser.username },
       {
         relations: ["role"],
@@ -73,8 +73,7 @@ export class UserController extends BaseHelper<User> {
         relations: ["role"],
       },
     );
-    const { password: _password, ...ret } = user;
-    return ret;
+    return user;
   }
 
   @Get("/:id/:relation")
@@ -116,7 +115,7 @@ export class UserController extends BaseHelper<User> {
       password,
       created_by: tokenUser.username,
     });
-    return { ...newUser, password: undefined };
+    return newUser;
   }
 
   @Post("/update_password")

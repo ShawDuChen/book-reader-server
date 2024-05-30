@@ -25,7 +25,7 @@ export class User extends CrudBaseEntity {
   @Column({ name: "username", type: "varchar", length: 32, comment: "用户名" })
   username!: string;
 
-  @Column({ type: "varchar", length: 255, comment: "密码" })
+  @Column({ type: "varchar", length: 255, comment: "密码", select: false })
   password!: string;
 
   @Column({ type: "varchar", length: 32, comment: "用户昵称" })
