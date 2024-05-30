@@ -12,9 +12,9 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { ChapterService, Chapter, CrawlRuleService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { ChapterService, Chapter, CrawlRuleService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 @Controller("/chapter")

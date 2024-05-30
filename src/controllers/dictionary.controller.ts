@@ -12,9 +12,9 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { Dictionary, DictionaryService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { Dictionary, DictionaryService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 @Controller("/dictionary")

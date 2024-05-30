@@ -1,6 +1,6 @@
 import CrudService from "./base/crud.service";
-import db from "../data-source";
-import { Chapter } from "../export";
+import db from "@/data-source";
+import { Chapter } from "@/export";
 import { crawlChapterContent } from "../utils/crawl";
 
 const repository = db.getRepository(Chapter);

@@ -12,9 +12,9 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { Menu, MenuService, RoleService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { Menu, MenuService, RoleService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
 import { listToTree } from "../utils/tree";
 import BaseHelper from "./base/helper";
 import { Response } from "express";

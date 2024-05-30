@@ -1,6 +1,6 @@
 import CrudService from "./base/crud.service";
-import db from "../data-source";
-import { DictionaryData } from "../export";
+import db from "@/data-source";
+import { DictionaryData } from "@/export";
 
 const repository = db.getRepository(DictionaryData);
 

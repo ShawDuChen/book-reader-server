@@ -13,11 +13,11 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { Code, CodeService, EntitiesMap } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { CodeColumn, PageQuery, TokenUser } from "../typing";
+import { Code, CodeService, EntitiesMap } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { CodeColumn, PageQuery, TokenUser } from "@/typing";
 import CodeGenerator from "../utils/code-generator";
-import { getMetaColumns } from "../data-source";
+import { getMetaColumns } from "@/data-source";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 @Controller("/code")

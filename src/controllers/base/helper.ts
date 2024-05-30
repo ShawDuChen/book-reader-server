@@ -1,7 +1,5 @@
 import { Response } from "express";
-import CrudService, {
-  CrudServiceProps,
-} from "../../services/base/crud.service";
+import CrudService, { CrudServiceProps } from "@/services/base/crud.service";
 import { HttpError } from "routing-controllers";
 
 export default class BaseHelper<T> {

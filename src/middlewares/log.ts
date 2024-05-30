@@ -1,9 +1,9 @@
 import { Response, NextFunction } from "express";
-import db from "../data-source";
-import { Logger } from "../export";
+import db from "@/data-source";
+import { Logger } from "@/export";
 import dayjs from "dayjs";
-import logger from "../logger";
-import { TokenRequest } from "../typing";
+import logger from "@/logger";
+import { TokenRequest } from "@/typing";
 
 export const logMiddleware = async (
   req: TokenRequest,

@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import { createValidateMiddleware } from "../middlewares/validator";
+import { createValidateMiddleware } from "@/middlewares/validator";
 
 const userValidatorRules = [
   check("username").isEmail().withMessage("Username must be an email"),

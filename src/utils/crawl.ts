@@ -1,6 +1,6 @@
 import request from "request";
 import { load } from "cheerio";
-import { Book, Chapter } from "../export";
+import { Book, Chapter } from "@/export";
 
 const fetchHTMLContent = (url?: string) => {
   return new Promise<string>((resolve, reject) => {

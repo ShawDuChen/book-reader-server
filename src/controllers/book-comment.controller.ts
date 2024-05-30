@@ -12,10 +12,10 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { BookComment, BookCommentService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
-import { ActionType } from "../entities/book-comment-action.entity";
+import { BookComment, BookCommentService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
+import { ActionType } from "@/entities/book-comment-action.entity";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 @Controller("/book_comment")

@@ -1,6 +1,6 @@
 import CrudService from "./base/crud.service";
-import db from "../data-source";
-import { User } from "../export";
+import db from "@/data-source";
+import { User } from "@/export";
 
 const userRepository = db.getRepository(User);
 

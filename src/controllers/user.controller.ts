@@ -13,9 +13,9 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { UserService, User, userValidator, RoleService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser, UpdatePasswordData } from "../typing";
+import { UserService, User, userValidator, RoleService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser, UpdatePasswordData } from "@/typing";
 import { createHash } from "../utils/hash";
 import BaseHelper from "./base/helper";
 import { Response } from "express";

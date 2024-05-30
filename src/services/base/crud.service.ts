@@ -4,10 +4,10 @@ import {
   ObjectLiteral,
   Repository,
 } from "typeorm";
-import { PageQuery } from "../../typing";
+import { PageQuery } from "@/typing";
 import { HttpError } from "routing-controllers";
 import { Workbook } from "exceljs";
-import { getMetaColumns } from "../../data-source";
+import { getMetaColumns } from "@/data-source";
 
 interface CommonLiteral {
   id: number;

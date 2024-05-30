@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node app.ts",
+    "dev": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register app.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -25,6 +25,7 @@
     "globals": "^15.2.0",
     "prettier": "3.2.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.9.0"
   },

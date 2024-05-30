@@ -8,9 +8,9 @@ import {
 } from "routing-controllers";
 import { JWT_SECRET, ONE_DAY_TIMESTAMP } from "../config";
 import jwt from "jsonwebtoken";
-import { UserService, User, userValidator } from "../export";
+import { UserService, User, userValidator } from "@/export";
 import { createHash } from "../utils/hash";
-import { CredentialsParams } from "../typing";
+import { CredentialsParams } from "@/typing";
 
 @Controller("/auth")
 export class LoginController {

@@ -13,9 +13,9 @@ import {
   UseBefore,
 } from "routing-controllers";
 import { Response } from "express";
-import { Author, AuthorService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { Author, AuthorService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
 
 @Controller("/author")

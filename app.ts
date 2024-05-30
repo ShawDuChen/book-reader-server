@@ -1,9 +1,9 @@
 import path from "node:path";
 import { json, urlencoded } from "body-parser";
 import { Action, createExpressServer } from "routing-controllers";
-import { authenticateToken, getToken, verify } from "./src/middlewares/jwt";
-import { logMiddleware } from "./src/middlewares/log";
-import ds from "./src/data-source";
+import { authenticateToken, getToken, verify } from "@/middlewares/jwt";
+import { logMiddleware } from "@/middlewares/log";
+import ds from "@/data-source";
 
 ds.initialize()
   .then(() => {

@@ -13,9 +13,9 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { BookService, Book, AuthorService, ChapterService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
+import { BookService, Book, AuthorService, ChapterService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 

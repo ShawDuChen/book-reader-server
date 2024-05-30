@@ -12,10 +12,10 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { ChapterReply, ChapterReplyService } from "../export";
-import { authenticateToken } from "../middlewares/jwt";
-import { PageQuery, TokenUser } from "../typing";
-import { ActionType } from "../entities/chapter-reply-action.entity";
+import { ChapterReply, ChapterReplyService } from "@/export";
+import { authenticateToken } from "@/middlewares/jwt";
+import { PageQuery, TokenUser } from "@/typing";
+import { ActionType } from "@/entities/chapter-reply-action.entity";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
 

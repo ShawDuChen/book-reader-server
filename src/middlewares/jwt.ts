@@ -1,5 +1,5 @@
 import { expressjwt } from "express-jwt";
-import { JWT_SECRET } from "../config";
+import { JWT_SECRET } from "@/config";
 import jwt from "jsonwebtoken";
 
 const whilteList = ["/", "/auth/login", "/auth/register"];

@@ -1,4 +1,4 @@
-import { CodeColumn } from "../typing";
+import { CodeColumn } from "@/typing";
 
 export default class CodeGenerator {
   private interface_code: string = "";

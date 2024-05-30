@@ -1,6 +1,6 @@
 import CrudService from "./base/crud.service";
-import db from "../data-source";
-import { CrawlRule } from "../export";
+import db from "@/data-source";
+import { CrawlRule } from "@/export";
 
 const repository = db.getRepository(CrawlRule);
 
