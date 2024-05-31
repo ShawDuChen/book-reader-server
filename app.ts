@@ -4,7 +4,7 @@ import { Action, createExpressServer } from "routing-controllers";
 import { authenticateToken, getToken, verify } from "@/middlewares/jwt";
 import { logMiddleware } from "@/middlewares/log";
 import ds from "@/data-source";
-import { uploadMiddleware } from "@/multer";
+import express from "express";
 
 ds.initialize()
   .then(() => {
@@ -21,9 +21,9 @@ ds.initialize()
       },
     });
 
-    app.use(logMiddleware);
+    app.use("/static", express.static(path.join(__dirname, "./uploads")));
 
-    // app.use(uploadMiddleware);
+    app.use(logMiddleware);
 
     app.use(authenticateToken);
 

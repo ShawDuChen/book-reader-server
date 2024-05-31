@@ -1,25 +1,36 @@
 import { authenticateToken } from "@/middlewares/jwt";
+import { fileUploadOptions } from "@/multer";
 import {
   BadRequestError,
-  ContentType,
-  Controller,
+  Body,
+  JsonController,
   Post,
+  QueryParams,
   UploadedFile,
   UseBefore,
 } from "routing-controllers";
-import { uploadMiddleware } from "@/multer";
 
-@Controller("/upload")
-@ContentType("multipart/form-data")
+@JsonController("/upload")
 @UseBefore(authenticateToken)
 export class UploadController {
   @Post("/file")
-  @UseBefore(uploadMiddleware)
-  async uploadFile(@UploadedFile("file") file: Express.Multer.File) {
-    console.log("file::::::::::::", file);
+  async uploadFile(
+    @Body() body: any,
+    @QueryParams() params: any,
+    @UploadedFile("file", {
+      options: fileUploadOptions(),
+    })
+    file: Express.Multer.File,
+  ) {
     if (!file) {
-      return new BadRequestError("File Not Exist");
+      throw new BadRequestError("File Not Exist");
     }
-    return "Uploaded";
+    console.log("uploadFile body::::::", body);
+    console.log("uploadFile params::::::", params);
+
+    return {
+      message: "success",
+      filename: `${process.env.STATIC_URL}${file.filename}`,
+    };
   }
 }
