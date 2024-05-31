@@ -63,4 +63,7 @@ export class Book extends CrudBaseEntity {
 
   @OneToMany(() => BookComment, (comment) => comment.book)
   comments?: BookComment[];
+
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "书本封面" })
+  cover?: string;
 }

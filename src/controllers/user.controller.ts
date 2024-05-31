@@ -13,7 +13,13 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { UserService, User, userValidator, RoleService } from "@/export";
+import {
+  UserService,
+  User,
+  userValidator,
+  RoleService,
+  MenuService,
+} from "@/export";
 import { authenticateToken } from "@/middlewares/jwt";
 import { PageQuery, TokenUser, UpdatePasswordData } from "@/typing";
 import { createHash } from "../utils/hash";
@@ -24,10 +30,12 @@ import { Response } from "express";
 export class UserController extends BaseHelper<User> {
   service: UserService;
   roleService: RoleService;
+  menuService: MenuService;
   constructor() {
     super();
     this.service = new UserService();
     this.roleService = new RoleService();
+    this.menuService = new MenuService();
   }
 
   @Get("/")
@@ -60,6 +68,9 @@ export class UserController extends BaseHelper<User> {
   @Get("/menus")
   async getMenus(@CurrentUser() tokenUser: TokenUser) {
     const user = await this.getInfo(tokenUser);
+    if (!!user.is_super) {
+      return this.menuService.menuTree();
+    }
     if (!user.role_id) return;
     const menus = await this.roleService.getRoleMenus(user.role_id);
     return menus;

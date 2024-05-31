@@ -83,4 +83,7 @@ export class User extends CrudBaseEntity {
 
   @OneToMany(() => ChapterReplyAction, (action) => action.user)
   chapter_reply_actions?: ChapterReplyAction[];
+
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "头像" })
+  avatar?: string;
 }

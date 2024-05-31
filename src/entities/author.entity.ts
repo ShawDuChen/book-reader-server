@@ -21,4 +21,7 @@ export class Author extends CrudBaseEntity {
 
   @OneToMany(() => Book, (book) => book.author)
   books?: Book[];
+
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "头像" })
+  avatar?: string;
 }
