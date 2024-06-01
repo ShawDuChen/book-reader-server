@@ -26,8 +26,8 @@ export default class CrudService<T extends CrudServiceProps> {
     this.repository = repository;
   }
 
-  async getAll() {
-    const [lists] = await this.repository.findAndCount();
+  async getAll(options?: FindManyOptions<T>) {
+    const [lists] = await this.repository.findAndCount(options);
     return lists;
   }
 

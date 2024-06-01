@@ -24,6 +24,7 @@ import { ChapterComment } from "./entities/chapter-comment.entity";
 import { ChapterReply } from "./entities/chapter-reply.entity";
 import { ChapterCommentAction } from "./entities/chapter-comment-action.entity";
 import { ChapterReplyAction } from "./entities/chapter-reply-action.entity";
+import { Source } from "./entities/source.entity";
 
 export {
   Book,
@@ -46,6 +47,7 @@ export {
   ChapterReply,
   ChapterCommentAction,
   ChapterReplyAction,
+  Source,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -69,6 +71,7 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   chapter_reply: ChapterReply,
   chapter_comment_action: ChapterCommentAction,
   chapter_reply_action: ChapterReplyAction,
+  source: Source,
 };
 
 // Services
@@ -92,3 +95,4 @@ export { default as ChapterCommentService } from "./services/chapter-comment.ser
 export { default as ChapterReplyService } from "./services/chapter-reply.service";
 export { default as ChapterCommentActionService } from "./services/chapter-comment-action.service";
 export { default as ChapterReplyActionService } from "./services/chapter-reply-action.service";
+export { default as SourceService } from "./services/source.service";

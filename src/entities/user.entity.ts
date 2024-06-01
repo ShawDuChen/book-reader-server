@@ -16,6 +16,7 @@ import { ChapterComment } from "./chapter-comment.entity";
 import { ChapterReply } from "./chapter-reply.entity";
 import { ChapterCommentAction } from "./chapter-comment-action.entity";
 import { ChapterReplyAction } from "./chapter-reply-action.entity";
+import { Source } from "./source.entity";
 
 @Entity("user")
 export class User extends CrudBaseEntity {
@@ -83,6 +84,9 @@ export class User extends CrudBaseEntity {
 
   @OneToMany(() => ChapterReplyAction, (action) => action.user)
   chapter_reply_actions?: ChapterReplyAction[];
+
+  @OneToMany(() => Source, (source) => source.user)
+  sources?: Source[];
 
   @Column({ type: "varchar", length: 255, nullable: true, comment: "头像" })
   avatar?: string;

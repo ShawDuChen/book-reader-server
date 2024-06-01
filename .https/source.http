@@ -1,0 +1,32 @@
+### Table List
+GET {{host}}/source?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/source/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/source
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "url": "http://localhost:7001/static/b755a5f3-4269-421e-9cf3-e5f8faf587eb-logo.png",
+  "type": "AUDIO"
+}
+
+### Table Update
+PUT {{host}}/source/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "url": "http://localhost:7001/static/b755a5f3-4269-421e-9cf3-e5f8faf587eb-logo.png",
+  "type": "OTHER"
+}
+
+### Table Delete
+DELETE {{host}}/source/1
+Authorization: {{token}}
+
