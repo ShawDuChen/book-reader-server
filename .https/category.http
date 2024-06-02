@@ -45,3 +45,6 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### EXTERNAL GET LIST
+GET {{host}}/api/category

@@ -6,6 +6,7 @@ import {
   Delete,
   Get,
   HttpError,
+  JsonController,
   Param,
   Post,
   Put,
@@ -118,5 +119,18 @@ export class BookController extends BaseHelper<Book> {
   @Delete("/:id")
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
+  }
+}
+
+@JsonController("/api/book")
+@UseBefore(authenticateToken)
+export class ApiBookController extends BookController {
+  constructor() {
+    super();
+  }
+
+  @Get("/")
+  async getAll() {
+    return this.service.getAll();
   }
 }

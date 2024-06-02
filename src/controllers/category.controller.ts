@@ -5,6 +5,7 @@ import {
   CurrentUser,
   Delete,
   Get,
+  JsonController,
   Param,
   Post,
   Put,
@@ -67,5 +68,18 @@ export class CategoryController extends BaseHelper<Category> {
   @Delete("/:id")
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
+  }
+}
+
+@JsonController("/api/category")
+@UseBefore(authenticateToken)
+export class ApiCategoryController extends CategoryController {
+  constructor() {
+    super();
+  }
+
+  @Get("/")
+  async getAll() {
+    return this.service.getAll();
   }
 }

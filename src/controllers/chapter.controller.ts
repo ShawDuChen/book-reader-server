@@ -5,6 +5,7 @@ import {
   CurrentUser,
   Delete,
   Get,
+  JsonController,
   Param,
   Post,
   Put,
@@ -90,5 +91,18 @@ export class ChapterController extends BaseHelper<Chapter> {
           .then((crawl_rule) => crawl_rule.content_selector)
       : "";
     return this.service.crawlChapter(chapter, content_selector);
+  }
+}
+
+@JsonController("/api/chapter")
+@UseBefore(authenticateToken)
+export class ApiChapterController extends ChapterController {
+  constructor() {
+    super();
+  }
+
+  @Get("/")
+  async getAll(@QueryParams() query: Pick<Chapter, "book_id">) {
+    return this.service.find({ where: { ...query } });
   }
 }

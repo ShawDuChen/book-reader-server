@@ -54,3 +54,6 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### API Book All
+GET {{host}}/api/book/all

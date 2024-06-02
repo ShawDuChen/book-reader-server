@@ -50,3 +50,6 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### API Author list
+GET {{host}}/api/author

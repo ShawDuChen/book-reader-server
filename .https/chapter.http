@@ -44,3 +44,6 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### GET API Chapter List With Book ID
+GET {{host}}/api/chapter?book_id=3

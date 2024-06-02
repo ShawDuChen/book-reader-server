@@ -7,7 +7,8 @@ const whilteList = [
   "/favicon.ico",
   "/auth/login",
   "/auth/register",
-  "/static/*",
+  /^\/static\//,
+  /^\/api\//,
 ];
 
 export const getToken = (authorization?: string) => {
