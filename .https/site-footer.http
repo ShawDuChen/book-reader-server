@@ -1,0 +1,30 @@
+### Table List
+GET {{host}}/site_footer?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/site_footer/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/site_footer
+Authorization: {{token}}
+Content-Type: application/json
+
+
+
+### Table Update
+PUT {{host}}/site_footer/1
+Authorization: {{token}}
+Content-Type: application/json
+
+
+
+### Table Delete
+DELETE {{host}}/site_footer/1
+Authorization: {{token}}
+
+
+
+### API SiteFooter Info
+GET {{host}}/api/site_footer/info
