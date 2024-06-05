@@ -48,3 +48,6 @@ Content-Type: application/json
 
 ### EXTERNAL GET LIST
 GET {{host}}/api/category
+
+### EXTERNAL GET Books With CategoryID
+GET {{host}}/api/category/1/books

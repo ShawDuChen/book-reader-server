@@ -37,7 +37,7 @@ GET  {{host}}/book/6/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-GET {{host}}/book/4/startCrawl
+GET {{host}}/book/1/startCrawl
 Authorization: {{token}}
 
 ### GET Dicationaryy all
@@ -57,3 +57,6 @@ Content-Type: application/json
 
 ### API Book All
 GET {{host}}/api/book/all
+
+### API Book Chapters With BookID
+GET {{host}}/api/book/1/chapters

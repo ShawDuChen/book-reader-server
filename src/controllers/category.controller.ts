@@ -13,7 +13,7 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { Category, CategoryService } from "@/export";
+import { BookService, Category, CategoryService } from "@/export";
 import { authenticateToken } from "@/middlewares/jwt";
 import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
@@ -22,10 +22,12 @@ import { Response } from "express";
 @UseBefore(authenticateToken)
 export class CategoryController extends BaseHelper<Category> {
   service: CategoryService;
+  bookService: BookService;
 
   constructor() {
     super();
     this.service = new CategoryService();
+    this.bookService = new BookService();
   }
 
   @Get("/")
@@ -81,5 +83,14 @@ export class ApiCategoryController extends CategoryController {
   @Get("/")
   async getAll() {
     return this.service.getAll();
+  }
+
+  @Get("/:id/books")
+  async getBooks(@Param("id") id: number) {
+    return this.bookService.getAll({
+      where: {
+        category_id: id,
+      },
+    });
   }
 }

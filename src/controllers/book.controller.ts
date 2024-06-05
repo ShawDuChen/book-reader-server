@@ -133,4 +133,9 @@ export class ApiBookController extends BookController {
   async getAll() {
     return this.service.getAll();
   }
+
+  @Get("/:id/chapters")
+  async getBookChapters(@Param("id") id: number) {
+    return this.queryChapters(id);
+  }
 }
