@@ -53,12 +53,27 @@ export class LoginController {
   @UseBefore(...userValidator) //json(),
   async register(@Body() user: User) {
     const password = createHash(user.password);
-    const nickname = this.getNickname(user.username);
+    const nickname = user.nickname || this.getNickname(user.username);
     return this.service.register({ ...user, password, nickname });
   }
 
   getNickname(username: string): string {
     const index = username.indexOf("@");
     return username.substring(0, index);
+  }
+
+  @Post("/reset_password")
+  @ContentType("application/json")
+  async resetPassword(
+    @Body() body: Pick<User, "username" | "password" | "tel">,
+  ) {
+    const { username, password, tel } = body;
+    const user = await this.service.queryOne({ username, tel });
+    if (!user) {
+      throw new BadRequestError("用户不存在");
+    }
+    const newPassword = createHash(password);
+    await this.service.update(user.id, { ...user, password: newPassword });
+    return user;
   }
 }

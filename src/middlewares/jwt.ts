@@ -7,6 +7,7 @@ const whilteList = [
   "/favicon.ico",
   "/auth/login",
   "/auth/register",
+  "/auth/reset_password",
   /^\/static\//,
   /^\/api\//,
 ];

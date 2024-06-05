@@ -71,7 +71,7 @@ export class UserController extends BaseHelper<User> {
     if (!!user.is_super) {
       return this.menuService.menuTree();
     }
-    if (!user.role_id) return;
+    if (!user.role_id) return [];
     const menus = await this.roleService.getRoleMenus(user.role_id);
     return menus;
   }
