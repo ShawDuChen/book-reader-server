@@ -105,4 +105,12 @@ export default class CrudService<T extends CrudServiceProps> {
     });
     return workbook;
   }
+
+  async sleep(time: number) {
+    return new Promise<boolean>((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, time);
+    });
+  }
 }

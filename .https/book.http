@@ -13,9 +13,10 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Book",
-  "category_id" : 7,
-  "author_id": 4
+  "name": "斗罗大陆Ⅳ终极斗罗",
+  "category_id" : 1,
+  "author_id": 1,
+  "fetch_url": "https://www.tangsanbooks.com/xs/zhongjidouluo"
 }
 
 ### PUT Book
@@ -24,8 +25,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Book Name 2",
-  "category_id": 1
+  "name": "斗罗大陆Ⅳ终极斗罗",
+  "category_id": 2
 }
 
 ### DELETE Book
@@ -33,11 +34,11 @@ DELETE  {{host}}/book/8
 Authorization: {{token}}
 
 ### GET Book Chapters By ID
-GET  {{host}}/book/6/chapters
+GET  {{host}}/book/7/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-GET {{host}}/book/1/startCrawl
+GET {{host}}/book/7/startCrawl
 Authorization: {{token}}
 
 ### GET Dicationaryy all
@@ -54,6 +55,11 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {}
+
+### Merge Book
+GET  {{host}}/book/7/merge_book
+Authorization: {{token}}
+
 
 ### API Book All
 GET {{host}}/api/book/all

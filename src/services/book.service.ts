@@ -19,7 +19,7 @@ export default class BookService extends CrudService<Book> {
         relations: ["chapters"],
       },
     );
-    return result.id ? result.chapters || [] : result;
+    return result.id ? result.chapters || [] : [];
   }
 
   async startCrawl(info: Book) {

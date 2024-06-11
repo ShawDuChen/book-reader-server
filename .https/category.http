@@ -15,9 +15,9 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "name": "科幻类",
-  "identify": "category1",
-  "remark": "这是科幻类备注"
+  "name": "玄幻类",
+  "identify": "xuanhuan",
+  "remark": ""
 }
 
 ### Update Category

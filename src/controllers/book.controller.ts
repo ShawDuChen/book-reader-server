@@ -19,6 +19,7 @@ import { authenticateToken } from "@/middlewares/jwt";
 import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
 import { Response } from "express";
+import BookMerger from "@/utils/book-merger";
 
 @Controller("/book")
 @UseBefore(authenticateToken)
@@ -92,6 +93,15 @@ export class BookController extends BaseHelper<Book> {
       total: book.comments?.length || 0,
       lists: book.comments || [],
     };
+  }
+
+  @Get("/:id/merge_book")
+  async mergeBook(@Param("id") id: number) {
+    const book = await this.queryById(id);
+    const chapters = await this.queryChapters(id);
+    const merger = new BookMerger(book, chapters);
+    const url = await merger.start();
+    return { message: "success", data: url };
   }
 
   @Post("/")

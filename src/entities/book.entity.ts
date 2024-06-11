@@ -25,11 +25,11 @@ export class Book extends CrudBaseEntity {
   @Column({ type: "int", comment: "分类ID" })
   category_id!: number;
 
-  @OneToOne(() => Category)
+  @ManyToOne(() => Category)
   @JoinColumn({
     name: "category_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "category_id",
+    foreignKeyConstraintName: "book_category_id",
   })
   category?: Category;
 
@@ -43,7 +43,7 @@ export class Book extends CrudBaseEntity {
   @JoinColumn({
     name: "author_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "author_id",
+    foreignKeyConstraintName: "book_author_id",
   })
   author?: Author;
 
