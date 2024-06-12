@@ -144,6 +144,22 @@ export class ApiBookController extends BookController {
     return this.service.getAll();
   }
 
+  @Get("/hot")
+  async getHotList() {
+    const { lists } = await this.queryList({ page: 1, limit: 20 });
+    return lists;
+  }
+
+  @Get("/:id")
+  async getBookInfo(@Param("id") id: number) {
+    return this.service.queryOne(
+      { id },
+      {
+        relations: ["chapters", "author"],
+      },
+    );
+  }
+
   @Get("/:id/chapters")
   async getBookChapters(@Param("id") id: number) {
     return this.queryChapters(id);

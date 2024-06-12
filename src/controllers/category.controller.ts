@@ -82,7 +82,15 @@ export class ApiCategoryController extends CategoryController {
 
   @Get("/")
   async getAll() {
-    return this.service.getAll();
+    return this.service.getAll({
+      relations: ["books"],
+    });
+  }
+
+  @Get("/hot")
+  async getHotList() {
+    const { lists } = await this.queryList({ page: 1, limit: 20 });
+    return lists;
   }
 
   @Get("/:id/books")

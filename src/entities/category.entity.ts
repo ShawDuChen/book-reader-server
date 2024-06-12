@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import CrudBaseEntity from "./tools/base-entity";
+import { Book } from "./book.entity";
 
 @Entity("category")
 export class Category extends CrudBaseEntity {
@@ -11,4 +12,7 @@ export class Category extends CrudBaseEntity {
 
   @Column({ type: "varchar", length: 255, comment: "分类标识" })
   identify!: string;
+
+  @OneToMany(() => Book, (book) => book.category)
+  books?: Book[];
 }

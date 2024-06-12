@@ -6,6 +6,7 @@ import {
   Delete,
   Get,
   JsonController,
+  NotFoundError,
   Param,
   Post,
   Put,
@@ -114,5 +115,26 @@ export class ApiChapterController extends ChapterController {
   @Get("/")
   async getAll(@QueryParams() query: Pick<Chapter, "book_id">) {
     return this.service.find({ where: { ...query } });
+  }
+
+  @Get("/hot")
+  async getHotList() {
+    const { lists } = await this.queryList({ page: 1, limit: 20 });
+    return lists;
+  }
+
+  @Get("/:id")
+  async getChapterDetail(@Param("id") id: number) {
+    await this.crawlChapter(id);
+    const chapter = await this.service.queryOne(
+      { id },
+      {
+        relations: ["book"],
+      },
+    );
+    if (!chapter) {
+      throw new NotFoundError("章节不存在");
+    }
+    return chapter;
   }
 }
