@@ -95,4 +95,9 @@ export class ApiAuthorController extends AuthorController {
     const { lists } = await this.queryList({ page: 1, limit: 20 });
     return lists;
   }
+
+  @Get("/:id")
+  async getAuthorInfo(@Param("id") id: number) {
+    return this.service.queryOne({ id }, { relations: ["books"] });
+  }
 }

@@ -93,6 +93,16 @@ export class ApiCategoryController extends CategoryController {
     return lists;
   }
 
+  @Get("/:id")
+  async getOne(@Param("id") id: number) {
+    return this.service.queryOne(
+      { id },
+      {
+        relations: ["books"],
+      },
+    );
+  }
+
   @Get("/:id/books")
   async getBooks(@Param("id") id: number) {
     return this.bookService.getAll({
