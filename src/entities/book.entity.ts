@@ -53,11 +53,11 @@ export class Book extends CrudBaseEntity {
   @Column({ type: "int", comment: "爬取规则ID", nullable: true })
   crawl_rule_id?: number;
 
-  @OneToOne(() => CrawlRule)
+  @ManyToOne(() => CrawlRule)
   @JoinColumn({
     name: "crawl_rule_id",
     referencedColumnName: "id",
-    foreignKeyConstraintName: "crawl_rule_id",
+    foreignKeyConstraintName: "book_crawl_rule_id",
   })
   crawl_rule?: CrawlRule;
 
