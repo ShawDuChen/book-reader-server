@@ -1,0 +1,34 @@
+### Table List
+GET {{host}}/advertiser?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/advertiser/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/advertiser
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "Root",
+  "tel": "1388888888",
+  "address": "测试地址"
+}
+
+### Table Update
+PUT {{host}}/advertiser/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "Root",
+  "tel": "1368888866",
+  "address": "测试地址"
+}
+
+### Table Delete
+DELETE {{host}}/advertiser/1
+Authorization: {{token}}
+

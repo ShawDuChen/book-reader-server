@@ -15,8 +15,8 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "name": "玄幻类",
-  "identify": "xuanhuan",
+  "name": "",
+  "identify": "kepuwen",
   "remark": ""
 }
 

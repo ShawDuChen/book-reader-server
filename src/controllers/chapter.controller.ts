@@ -123,8 +123,7 @@ export class ApiChapterController extends ChapterController {
 
   @Get("/hot")
   async getHotList() {
-    const { lists } = await this.queryList({ page: 1, limit: 20 });
-    return lists;
+    return this.service.random(20);
   }
 
   @Get("/:id")

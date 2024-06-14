@@ -113,4 +113,12 @@ export default class CrudService<T extends CrudServiceProps> {
       }, time);
     });
   }
+
+  async random(limit: number) {
+    return this.repository
+      .createQueryBuilder()
+      .orderBy("RAND()")
+      .limit(limit)
+      .getMany();
+  }
 }

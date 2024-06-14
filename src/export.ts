@@ -26,6 +26,8 @@ import { ChapterCommentAction } from "./entities/chapter-comment-action.entity";
 import { ChapterReplyAction } from "./entities/chapter-reply-action.entity";
 import { Source } from "./entities/source.entity";
 import { SiteFooter } from "./entities/footer.entity";
+import { Advertiser } from "./entities/advertiser.entity";
+import { Ads } from "./entities/ads.entity";
 
 export {
   Book,
@@ -50,6 +52,8 @@ export {
   ChapterReplyAction,
   Source,
   SiteFooter,
+  Advertiser,
+  Ads,
 };
 
 export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
@@ -75,6 +79,8 @@ export const EntitiesMap: Record<string, EntityTarget<unknown>> = {
   chapter_reply_action: ChapterReplyAction,
   source: Source,
   site_footer: SiteFooter,
+  advertiser: Advertiser,
+  ads: Ads,
 };
 
 // Services
@@ -100,3 +106,5 @@ export { default as ChapterCommentActionService } from "./services/chapter-comme
 export { default as ChapterReplyActionService } from "./services/chapter-reply-action.service";
 export { default as SourceService } from "./services/source.service";
 export { default as SiteFooterService } from "./services/site-footer.service";
+export { default as AdvertiserService } from "./services/advertiser.service";
+export { default as AdsService } from "./services/ads.service";

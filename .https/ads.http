@@ -1,0 +1,33 @@
+### Table List
+GET {{host}}/ads?page=1&limit=10
+Authorization: {{token}}
+
+### Table Item
+GET {{host}}/ads/1
+Authorization: {{token}}
+
+### Table Create
+POST {{host}}/ads
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "title": "欢迎投放",
+  "link": "https://www.baidu.com",
+  "image": "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+  "advertiser_id": 1,
+  "description": "10天置顶",
+  "expired_at": "2024-06-24 00:00:00"
+}
+
+### Table Update
+PUT {{host}}/ads/1
+Authorization: {{token}}
+Content-Type: application/json
+
+
+
+### Table Delete
+DELETE {{host}}/ads/1
+Authorization: {{token}}
+
