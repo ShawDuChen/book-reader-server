@@ -31,3 +31,6 @@ Content-Type: application/json
 DELETE {{host}}/ads/1
 Authorization: {{token}}
 
+
+#### API GET
+GET {{host}}/api/ads

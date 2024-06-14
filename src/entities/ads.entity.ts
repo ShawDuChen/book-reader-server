@@ -45,4 +45,7 @@ export class Ads extends CrudBaseEntity {
     transformer: new DateTimeTransformer(),
   })
   expired_at?: string;
+
+  @Column({ type: "int", default: 1, comment: "状态: 1-可用;0-不可用" })
+  status?: number;
 }

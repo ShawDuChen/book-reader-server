@@ -5,6 +5,7 @@ import {
   CurrentUser,
   Delete,
   Get,
+  JsonController,
   Param,
   Post,
   Put,
@@ -67,5 +68,25 @@ export class AdsController extends BaseHelper<Ads> {
   @Delete("/:id")
   async delete(@Param("id") id: number) {
     return this.service.delete(id);
+  }
+}
+
+@JsonController("/api/ads")
+@UseBefore(authenticateToken)
+export class ApiAdsController extends AdsController {
+  constructor() {
+    super();
+  }
+
+  @Get()
+  async getAll() {
+    const data = await this.service.getAll();
+    return data.filter((item) => {
+      return (
+        item.status === 1 &&
+        item.expired_at &&
+        new Date(item.expired_at).getTime() > Date.now()
+      );
+    });
   }
 }
