@@ -1,4 +1,4 @@
-### Table List
+### Table List - book-navigation:https://www.jspoo.com/fl/xiaoshuo/page/3
 GET {{host}}/crawl_rule?page=1&limit=10
 Authorization: {{token}}
 
@@ -12,10 +12,10 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "name": "站点名称",
-  "website_url": "https://wwww.example.com",
-  "list_selector": ".list-chapter li a",
-  "content_selector": ".article .article-box"
+  "name": "渣渣小说网",
+  "website_url": "https://www.zztxt.net",
+  "list_selector": ".mulu:eq(1) li a",
+  "content_selector": "#content"
 }
 
 ### Table Update

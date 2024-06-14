@@ -23,6 +23,7 @@ const dataSource = new DataSource({
   entityPrefix: "",
   logging: true,
   synchronize: true,
+  charset: "utf8mb4", // 设置字符集
 });
 
 export function getMetaColumns<T = unknown>(

@@ -13,10 +13,11 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "斗罗大陆Ⅳ终极斗罗",
+  "name": "元尊",
   "category_id" : 1,
   "author_id": 1,
-  "fetch_url": "https://www.tangsanbooks.com/xs/zhongjidouluo"
+  "fetch_url": "https://www.zztxt.net/book/67/",
+  "crawl_rule_id": 18
 }
 
 ### PUT Book
@@ -38,7 +39,7 @@ GET  {{host}}/book/7/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-GET {{host}}/book/7/startCrawl
+GET {{host}}/book/24/startCrawl
 Authorization: {{token}}
 
 ### GET Dicationaryy all

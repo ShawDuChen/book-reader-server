@@ -19,7 +19,13 @@ export class Chapter extends CrudBaseEntity {
   @Column({ type: "varchar", length: 255, comment: "章节标题" })
   title!: string;
 
-  @Column({ type: "text", nullable: true, comment: "章节内容" })
+  @Column({
+    type: "text",
+    nullable: true,
+    comment: "章节内容",
+    charset: "utf8mb4",
+    collation: "utf8mb4_unicode_ci",
+  })
   content?: string;
 
   @Column({ type: "int", comment: "书本ID" })

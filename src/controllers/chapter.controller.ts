@@ -96,6 +96,10 @@ export class ChapterController extends BaseHelper<Chapter> {
       { id },
       { relations: ["book"] },
     );
+    if (chapter.content) {
+      // 已有内容不做二次爬取
+      return chapter;
+    }
     const content_selector = chapter.book?.crawl_rule_id
       ? await this.crawlRuleService
           .queryOne({ id: chapter.book.crawl_rule_id })
@@ -125,13 +129,7 @@ export class ApiChapterController extends ChapterController {
 
   @Get("/:id")
   async getChapterDetail(@Param("id") id: number) {
-    await this.crawlChapter(id);
-    const chapter = await this.service.queryOne(
-      { id },
-      {
-        relations: ["book"],
-      },
-    );
+    const chapter = await this.crawlChapter(id);
     if (!chapter) {
       throw new NotFoundError("章节不存在");
     }

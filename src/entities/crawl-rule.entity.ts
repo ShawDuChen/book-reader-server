@@ -19,6 +19,14 @@ export class CrawlRule extends CrudBaseEntity {
   @Column({ type: "varchar", length: 64, comment: "内容选择器" })
   content_selector!: string;
 
+  @Column({
+    type: "int",
+    comment: "状态:1-可用;0-不可用;",
+    nullable: true,
+    default: 1,
+  })
+  status?: number;
+
   @ManyToOne(() => Book, (book) => book.crawl_rule)
   books?: Book[];
 }
