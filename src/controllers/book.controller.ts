@@ -145,8 +145,8 @@ export class ApiBookController extends BookController {
   }
 
   @Get("/hot")
-  async getHotList() {
-    return this.service.random(20);
+  async getHotList(@QueryParams() { limit }: { limit?: number }) {
+    return this.service.random(limit || 20);
   }
 
   @Get("/:id")

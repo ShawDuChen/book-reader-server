@@ -81,15 +81,19 @@ export class ApiCategoryController extends CategoryController {
   }
 
   @Get("/")
-  async getAll() {
-    return this.service.getAll({
+  async getAll(@QueryParams() { book_limit }: { book_limit?: number }) {
+    const categorys = await this.service.getAll({
       relations: ["books"],
     });
+    return categorys.map((item) => ({
+      ...item,
+      books: item.books?.slice(0, book_limit || 10),
+    }));
   }
 
   @Get("/hot")
-  async getHotList() {
-    return this.service.random(20);
+  async getHotList(@QueryParams() { limit }: { limit?: number }) {
+    return this.service.random(limit || 20);
   }
 
   @Get("/:id")

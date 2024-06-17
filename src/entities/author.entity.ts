@@ -24,4 +24,7 @@ export class Author extends CrudBaseEntity {
 
   @Column({ type: "varchar", length: 255, nullable: true, comment: "头像" })
   avatar?: string;
+
+  @Column({ type: "varchar", length: 255, nullable: true, comment: "简介" })
+  description?: string;
 }
