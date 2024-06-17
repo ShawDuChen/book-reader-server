@@ -132,6 +132,26 @@ export class ApiChapterController extends ChapterController {
     if (!chapter) {
       throw new NotFoundError("章节不存在");
     }
-    return chapter;
+
+    const no = parseInt(chapter.no);
+    const prev_no = no - 1;
+    const next_no = no + 1;
+    let prev_chapter_id: number = 0;
+    let next_chapter_id: number = 0;
+    if (prev_no > 0) {
+      prev_chapter_id = (
+        await this.service.queryOne({
+          book_id: chapter.book_id,
+          no: `${prev_no}`.padStart(4, "0"),
+        })
+      ).id;
+    }
+    next_chapter_id = (
+      await this.service.queryOne({
+        book_id: chapter.book_id,
+        no: `${next_no}`.padStart(4, "0"),
+      })
+    ).id;
+    return { ...chapter, prev_chapter_id, next_chapter_id };
   }
 }
