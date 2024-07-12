@@ -13,11 +13,11 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "元尊",
+  "name": "宇宙职业选手",
   "category_id" : 1,
   "author_id": 1,
-  "fetch_url": "https://www.zztxt.net/book/67/",
-  "crawl_rule_id": 18
+  "fetch_url": "https://www.mingzw.net/mzwbook/40160.html",
+  "crawl_rule_id": 4
 }
 
 ### PUT Book
@@ -39,7 +39,7 @@ GET  {{host}}/book/7/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-GET {{host}}/book/24/startCrawl
+GET {{host}}/book/26/startCrawl
 Authorization: {{token}}
 
 ### GET Dicationaryy all
@@ -58,9 +58,12 @@ Content-Type: application/json
 {}
 
 ### Merge Book
-GET  {{host}}/book/7/merge_book
+GET  {{host}}/book/26/merge_book
 Authorization: {{token}}
 
+### Crawl Chapter Content
+GET {{host}}/book/26/crawl_chapter_content
+Authorization: {{token}}
 
 ### API Book All
 GET {{host}}/api/book/all

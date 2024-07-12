@@ -68,7 +68,7 @@ export class ChapterController extends BaseHelper<Chapter> {
   @Post("/bacth_crawl")
   @ContentType("application/json")
   async bacth_crawl(@Body() body: { ids: number[] }) {
-    for (let id of body.ids) {
+    for (const id of body.ids) {
       await this.crawlChapter(id);
       await this.service.sleep(200);
     }

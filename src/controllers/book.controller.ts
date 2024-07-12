@@ -14,7 +14,13 @@ import {
   Res,
   UseBefore,
 } from "routing-controllers";
-import { BookService, Book, AuthorService, ChapterService } from "@/export";
+import {
+  BookService,
+  Book,
+  AuthorService,
+  ChapterService,
+  CrawlRuleService,
+} from "@/export";
 import { authenticateToken } from "@/middlewares/jwt";
 import { PageQuery, TokenUser } from "@/typing";
 import BaseHelper from "./base/helper";
@@ -27,12 +33,14 @@ export class BookController extends BaseHelper<Book> {
   service: BookService;
   authorService: AuthorService;
   chapterService: ChapterService;
+  crawlRuleService: CrawlRuleService;
 
   constructor() {
     super();
     this.service = new BookService();
     this.authorService = new AuthorService();
     this.chapterService = new ChapterService();
+    this.crawlRuleService = new CrawlRuleService();
   }
 
   @Get("/")
@@ -66,7 +74,7 @@ export class BookController extends BaseHelper<Book> {
   async startCrawl(@Param("id") id: number) {
     const book = await this.queryById(id);
     if (!book.fetch_url) {
-      return new HttpError(400, "请先设置抓取地址");
+      throw new HttpError(400, "请先设置抓取地址");
     }
     const chapterList = await this.service.startCrawl(book);
     for (let i = 0; i < chapterList.length; i++) {
@@ -80,7 +88,7 @@ export class BookController extends BaseHelper<Book> {
         { no, title, book_id: book.id, url },
       );
     }
-    return { message: "success", total: chapterList.length };
+    return { message: "success", total: chapterList.length, data: book };
   }
 
   @Get("/:id/comments")
@@ -102,6 +110,27 @@ export class BookController extends BaseHelper<Book> {
     const merger = new BookMerger(book, chapters);
     const url = await merger.start();
     return { message: "success", data: url };
+  }
+
+  @Get("/:id/crawl_chapter_content")
+  async crawlContent(@Param("id") id: number) {
+    try {
+      const { data } = await this.startCrawl(id);
+      const chapters = await this.service.queryChapters(id);
+      for (const chapter of chapters) {
+        if (!chapter.content) {
+          const content_selector = data?.crawl_rule_id
+            ? await this.crawlRuleService
+                .queryOne({ id: data.crawl_rule_id })
+                .then((crawl_rule) => crawl_rule.content_selector)
+            : "";
+          await this.chapterService.crawlChapter(chapter, content_selector);
+        }
+      }
+      return { total: chapters.length };
+    } catch (e) {
+      return { message: (e as Error).message };
+    }
   }
 
   @Post("/")

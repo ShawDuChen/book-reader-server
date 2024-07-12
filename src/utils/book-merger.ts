@@ -14,7 +14,10 @@ export default class BookMerger {
     const bookName = this.book.name;
     const filepath = resolve(__dirname, "../../uploads/" + bookName + ".txt");
     const contents = this.chapters
-      .map((item) => `${item.no}${item.title}\n\n${item.content || ""}`)
+      .map(
+        (item) =>
+          `${item.no}${item.title}\n\n${item.content?.replaceAll("\n", "").split("  ").join("\n") || ""}`,
+      )
       .join("\n\n\n");
     return new Promise<string>((resolve, reject) => {
       fs.writeFile(filepath, contents, (err) => {
