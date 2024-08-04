@@ -7,13 +7,6 @@ const fetchHTMLContent = (url?: string) => {
     if (!url) {
       return resolve("");
     }
-    // request(url, (err, res, body) => {
-    //   if (err) {
-    //     reject(err);
-    //   } else {
-    //     resolve(body);
-    //   }
-    // });
     fetch(url)
       .then((data) => resolve(data.text()))
       .catch((e) => reject(e));
@@ -34,6 +27,7 @@ const resolveBookList = (
     const url = $el.attr("href") || "";
     const chapter: Partial<Chapter> = {
       no: `${index}`.padStart(4, "0"),
+      // eslint-disable-next-line no-useless-escape
       title: title?.replaceAll(/[\\\/:\*\?<>|"]/g, ""),
       url: url && !url.startsWith("http") ? `${website_url}${url}` : url,
     };
@@ -78,12 +72,30 @@ export const crawlBookChapters = async (book: Book) => {
   return chapterList;
 };
 
+const resolvePageList = async (content: string, selector = "#page-links a") => {
+  const $ = load(content);
+  const $page = $(selector);
+  const links: string[] = [];
+  $page.each((index, el) => {
+    links.push($(el).attr("href") || "");
+  });
+  console.log("links::::", links);
+
+  return links.filter((link) => !!link);
+};
+
 export const crawlChapterContent = async (
   url?: string,
   content_selector?: string,
+  page_selector?: string,
 ) => {
   if (!url) return null;
   const chapterHTML = await fetchHTMLContent(url);
-  const chapterContent = reoslveChapterContent(chapterHTML, content_selector);
+  let chapterContent = reoslveChapterContent(chapterHTML, content_selector);
+  const pageListURL = await resolvePageList(chapterHTML, page_selector);
+  for (const pageURL of pageListURL) {
+    const pageHTML = await fetchHTMLContent(pageURL);
+    chapterContent += reoslveChapterContent(pageHTML, content_selector);
+  }
   return chapterContent;
 };

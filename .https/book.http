@@ -39,7 +39,7 @@ GET  {{host}}/book/7/chapters
 Authorization: {{token}}
 
 ### POST Crawl Book
-GET {{host}}/book/26/startCrawl
+GET {{host}}/book/1/startCrawl
 Authorization: {{token}}
 
 ### GET Dicationaryy all
@@ -58,11 +58,11 @@ Content-Type: application/json
 {}
 
 ### Merge Book
-GET  {{host}}/book/26/merge_book
+GET  {{host}}/book/1/merge_book
 Authorization: {{token}}
 
 ### Crawl Chapter Content
-GET {{host}}/book/26/crawl_chapter_content
+GET {{host}}/book/1/crawl_chapter_content
 Authorization: {{token}}
 
 ### API Book All

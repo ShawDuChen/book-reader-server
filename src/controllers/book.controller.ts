@@ -118,14 +118,14 @@ export class BookController extends BaseHelper<Book> {
       const { data } = await this.startCrawl(id);
       const chapters = await this.service.queryChapters(id);
       for (const chapter of chapters) {
-        if (!chapter.content) {
-          const content_selector = data?.crawl_rule_id
-            ? await this.crawlRuleService
-                .queryOne({ id: data.crawl_rule_id })
-                .then((crawl_rule) => crawl_rule.content_selector)
-            : "";
-          await this.chapterService.crawlChapter(chapter, content_selector);
-        }
+        // if (!chapter.content) {
+        const content_selector = data?.crawl_rule_id
+          ? await this.crawlRuleService
+              .queryOne({ id: data.crawl_rule_id })
+              .then((crawl_rule) => crawl_rule.content_selector)
+          : "";
+        await this.chapterService.crawlChapter(chapter, content_selector);
+        // }
       }
       return { total: chapters.length };
     } catch (e) {
